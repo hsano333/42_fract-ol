@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 02:55:18 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/21 15:44:09 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/21 18:39:07 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,24 +49,15 @@ static int	init_mlx(t_fract *fract)
 	}
 	mlx_mouse_hook(fract->window, hook_mouse, 0);
 	mlx_key_hook(fract->window, hook_key, 0);
-	//mlx_hook(fract->window, MotionNotify, PointerMotionMask, detect_move, 0);
-	//mlx_loop_hook(fract->mlx, detect_move, 0);
 	return (true);
 }
 
 void	init(int argc, char** argv, t_fract *fract)
 {
-	//t_xvar	*xvar;
-
-	printf("init No.1\n");
 	ft_memset(fract, 0, sizeof(t_fract));
-	printf("init No.2\n");
 	fract->error = NO_ERROR;
-	printf("init No.3\n");
 	if (argc >= 2)
 		set_fract(argv, fract);
-	printf("init No.4\n");
 	init_mlx(fract);
-	printf("init No.5\n");
 
 }

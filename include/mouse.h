@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   mouse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/21 02:54:57 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/21 15:52:34 by hsano            ###   ########.fr       */
+/*   Created: 2022/08/21 15:54:34 by hsano             #+#    #+#             */
+/*   Updated: 2022/08/21 18:35:47 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
-#include "fract.h"
-#include "ft_printf.h"
-
-int main(int argc, char** argv)
-{
-	t_fract	fract;
-
-	init(argc, argv, &fract);
-	mlx_loop(fract.mlx);
-	return (0);
-}
+enum	e_click{
+	LEFT = 1,
+	WHEEL,
+	RIGHT,
+	SCROLL_UP,
+	SCROLL_DOWN,
+};
