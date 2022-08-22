@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 02:54:57 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/22 03:42:59 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/22 18:50:17 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int main(int argc, char** argv)
 
 	init(argc, argv, &fract);
 	create_image(&fract);
-	mlx_put_image_to_window(fract.mlx, fract.window, fract.image_info.image, 80, 80);
+	mlx_put_image_to_window(fract.mlx, fract.window, fract.image_info.image, 0, 0);
 	mlx_loop(fract.mlx);
 	return (0);
 }

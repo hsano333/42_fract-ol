@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 03:01:01 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/22 17:43:02 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/22 18:53:39 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 #include "ft_printf.h"
 //#include "image_fract.h"
 
-#define W_HEIGHT 1024
-#define W_WIDTH	768
-#define IMAGE_HEIGHT 1280
-#define IMAGE_WIDTH 960
+#define W_WIDTH	1024
+#define W_HEIGHT 768
+#define IMAGE_WIDTH 1280
+#define IMAGE_HEIGHT 960
 
 enum	e_fract{
 	MANDELBROT,

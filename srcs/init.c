@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 02:55:18 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/22 17:43:32 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/22 18:54:28 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	init_mlx(t_fract *fract)
 		fract->error = MLX_INIT_ERROR;
 		return (false);
 	}
-	fract->window = mlx_new_window(fract->mlx, W_HEIGHT, W_WIDTH, "fractl-ol");
+	fract->window = mlx_new_window(fract->mlx, W_WIDTH, W_HEIGHT, "fractl-ol");
 	if (!fract->window)
 	{
 		fract->error = MLX_WINDOW_ERROR;
