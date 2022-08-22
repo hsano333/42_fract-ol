@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 02:55:18 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/21 18:39:07 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/22 17:43:32 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "libft_isto.h"
 #include "libft_str.h"
 #include "libft_mem.h"
+#include "image.h"
 
 static void	set_fract(char **argv, t_fract *fract)
 {
@@ -24,12 +25,18 @@ static void	set_fract(char **argv, t_fract *fract)
 	i = -1;
 	while (str[i++])
 		str[i] = ft_tolower(str[i]);
-	if (ft_strncmp(argv[1], "julia", ft_strlen("julia")) 
-			|| ft_strncmp(argv[1], "j", 1) || ft_strncmp(argv[1], "1", 1))
+	if (!ft_strncmp(argv[1], "julia", ft_strlen("julia")) 
+			|| !ft_strncmp(argv[1], "j", 1) || !ft_strncmp(argv[1], "1", 1))
+	{
+		fract->fract_set = JULIA;
+		fract->get_color = (int (*)())get_mandelbrot_color;
+	}
+	else if (!ft_strncmp(argv[1], "mandelbrot", ft_strlen("mandelbrot")) 
+			|| !ft_strncmp(argv[1], "m", 1) || !ft_strncmp(argv[1], "2", 1))
+	{
 		fract->fract_set = MANDELBROT;
-	else if (ft_strncmp(argv[1], "mandelbrot", ft_strlen("mandelbrot")) 
-			|| ft_strncmp(argv[1], "m", 1) || ft_strncmp(argv[1], "2", 1))
-		fract->fract_set = MANDELBROT;
+		fract->get_color = (int (*)())get_julia_color;
+	}
 }
 
 static int	init_mlx(t_fract *fract)
@@ -47,6 +54,8 @@ static int	init_mlx(t_fract *fract)
 		fract->error = MLX_WINDOW_ERROR;
 		return (false);
 	}
+	fract->w_width = W_WIDTH;
+	fract->w_height = W_HEIGHT;
 	mlx_mouse_hook(fract->window, hook_mouse, 0);
 	mlx_key_hook(fract->window, hook_key, 0);
 	return (true);

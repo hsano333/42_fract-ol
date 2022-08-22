@@ -9,7 +9,7 @@ LIBFTNAME	:= libft.a
 LIBFT		:= $(LIBFTDIR)/$(LIBFTNAME)
 
 SRCDIR	:= ./srcs/
-SRC	:= init.c key.c mouse.c
+SRC	:= init.c key.c mouse.c image.c julia.c mandelbrot.c
 ENTRY	:= main.c
 ENTRYBONUS	:= main_bonus.c
 ifdef WITH_BONUS
