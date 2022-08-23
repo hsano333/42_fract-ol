@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 02:55:18 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/23 11:25:54 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/23 14:35:30 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,16 @@ static int	set_option(int argc, char **argv, t_fract *fract)
 
 	return (true);
 }
+int	expose_win(void *p)
+{
+	t_fract *fract;
+	fract = p;
+	ft_printf("expose_test No.1 %p\n", fract);
+	//mlx_put_image_to_window(mlx,win1,im3,0,0);
+	//mlx_put_image_to_window(fract->mlx, fract->window, fract->image_info.image, 80, 80);
+	mlx_put_image_to_window(fract->mlx, fract->window, fract->image_info.image, 0, 0);
+	return (true);
+}
 
 static int	init_mlx(t_fract *fract)
 {
@@ -73,8 +83,9 @@ static int	init_mlx(t_fract *fract)
 		fract->error = MLX_WINDOW_ERROR;
 		return (false);
 	}
-	mlx_mouse_hook(fract->window, hook_mouse, 0);
-	mlx_key_hook(fract->window, hook_key, 0);
+	mlx_expose_hook(fract->window, expose_win, fract);
+	mlx_mouse_hook(fract->window, hook_mouse, fract);
+	mlx_key_hook(fract->window, hook_key, fract);
 	return (true);
 }
 

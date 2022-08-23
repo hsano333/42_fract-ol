@@ -6,11 +6,12 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 01:31:35 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/23 09:35:49 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/23 14:34:22 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fract.h"
+
 
 void	mapping_color(t_fract *fract, unsigned char *ptr, int x, int color)
 {
@@ -81,5 +82,11 @@ int	create_image(t_fract *fract)
 
 }
 
+/*
+void	update_image()
+{
+
+}
+*/
 
 

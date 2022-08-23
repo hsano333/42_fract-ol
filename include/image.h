@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 02:41:17 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/23 12:23:16 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/23 15:04:15 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #define R_END 0.8
 #define I_START -1.2
 #define I_END 1.2
+#define ZOOM_RATIO 1.2
 
 #include "fract.h"
 

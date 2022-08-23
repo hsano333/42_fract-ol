@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 03:01:01 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/23 11:52:37 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/23 16:28:50 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void	init(int argc, char** argv, t_fract *fract);
 int	hook_key(int key, void *p);
 int	hook_mouse(int key, int x, int y, void*toto);
 int	detect_move(int x, int y, void *p);
+void	update_display_area(t_fract *fract, t_point point, float zoom_ratio);
 
 
 #endif
