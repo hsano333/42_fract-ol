@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 03:01:01 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/22 18:53:39 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/23 11:52:37 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@
 #define IMAGE_WIDTH 1280
 #define IMAGE_HEIGHT 960
 
+#define INTERATION_MAX 100
+#define SPEED_THRESHOLD 5
+
 enum	e_fract{
 	MANDELBROT,
 	JULIA,
@@ -37,6 +40,23 @@ enum	s_error{
 	MLX_INIT_ERROR,
 	MLX_WINDOW_ERROR,
 };
+
+typedef struct s_point {
+	int	x;
+	int	y;
+}	t_point;
+
+typedef struct s_ipoint {
+	float	r;
+	float	i;
+}	t_ipoint;
+
+typedef struct s_iarea {
+	float	r_begin;
+	float	r_last;
+	float	i_begin;
+	float	i_last;
+}	t_iarea;
 
 typedef struct s_image {
 	void	*image;
@@ -51,10 +71,15 @@ typedef struct s_fract {
 	void	*window;
 	void	*mlx;
 	t_image	image_info;
+	t_iarea	i_area;
 	int	w_width;
 	int	w_height;
 	int	error;
-	int	(*get_color)(void *, int , int);
+	int	speed_thoreshold;
+	int	iteration_max;
+	int	(*get_color)(void *, t_point);
+	t_ipoint	step;
+	t_ipoint	c;
 }	t_fract;
 
 
