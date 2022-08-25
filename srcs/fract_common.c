@@ -6,12 +6,29 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 05:38:17 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/23 19:37:08 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/25 18:16:21 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fract.h"
 #include "image.h"
+
+int	unlock(t_fract *fract)
+{
+	fract->lock = false;
+	return (true);
+}
+
+int	close_fract(t_fract *fract)
+{
+	ft_printf("close_fracti test No1\n");
+	if (fract->image_info.image)
+		mlx_destroy_image(fract->mlx, fract->image_info.image);
+	mlx_destroy_window(fract->mlx, fract->window);
+	exit(0);
+
+	return (0);
+}
 
 void	set_step(t_fract *fract)
 {
@@ -22,44 +39,32 @@ void	set_step(t_fract *fract)
 
 }
 
-void	update_display_area(t_fract *fract, t_point point, float zoom_ratio)
+void	update_display_area(t_fract *fract, t_point point, float zoom_ratio, t_point offset)
 {
-	float	r_distance;
-	float	i_distance;
+	t_ipoint	distance;
 	t_ipoint	ratio;
 	t_ipoint	center;
 	t_ipoint	zoom_center;
-	//t_ipoint	tmp;
-	
+	t_iarea	tmp_area;
 
-	zoom_center.r = fract->i_area.r_begin + fract->step.r * point.x;
-	zoom_center.i = fract->i_area.i_begin + fract->step.i * point.y;
-
+	zoom_center.r = fract->i_area.r_begin + fract->step.r * (point.x + offset.x);
+	zoom_center.i = fract->i_area.i_begin + fract->step.i * (point.y + offset.y);
 	ratio.r = (zoom_center.r - fract->i_area.r_begin) / (fract->i_area.r_last - fract->i_area.r_begin);
 	ratio.i = (zoom_center.i - fract->i_area.i_begin) / (fract->i_area.i_last - fract->i_area.i_begin);
-
-	center.r = fract->i_area.r_begin + fract->step.r * point.x;
-	center.i = fract->i_area.i_begin + fract->step.i * point.y;
-	//center.r = fract->i_area.r_begin + ratio.r;
-	//center.i = fract->i_area.i_begin + ratio.i;
-	//center.r = (fract->i_area.r_last - fract->i_area.r_begin)/2;
-	//center.i = (fract->i_area.i_last - fract->i_area.i_begin)/2;
-
-	printf("before chage:r_begin=%f, r_last=%f,i_begin=%f, i_last=%f, step.r=%f, step.i=%f\n ",fract->i_area.r_begin,fract->i_area.r_last,fract->i_area.i_begin, fract->i_area.i_last,fract->step.r,fract->step.i);
-	r_distance = (fract->i_area.r_last - fract->i_area.r_begin) * zoom_ratio;
-	i_distance = (fract->i_area.i_last - fract->i_area.i_begin) * zoom_ratio;
-	//r_distance = (fract->i_area.r_last - fract->i_area.r_begin) * zoom_ratio / 2;
-	//i_distance = (fract->i_area.i_last - fract->i_area.i_begin) * zoom_ratio / 2;
-	if (center.r - r_distance * ratio.r < center.r + r_distance * (1 - ratio.r) && center.i - i_distance * ratio.i < center.i + i_distance * (1 - ratio.i))
+	center.r = fract->i_area.r_begin + fract->step.r * (point.x);
+	center.i = fract->i_area.i_begin + fract->step.i * (point.y);
+	distance.r = (fract->i_area.r_last - fract->i_area.r_begin) * zoom_ratio;
+	distance.i = (fract->i_area.i_last - fract->i_area.i_begin) * zoom_ratio;
+	tmp_area.r_begin = center.r - distance.r * ratio.r;
+	tmp_area.r_last  = center.r + distance.r * (1 - ratio.r);
+	tmp_area.i_begin = center.i - distance.i * ratio.i;
+	tmp_area.i_last = center.i + distance.i * (1 - ratio.i);
+	if (tmp_area.r_begin + DBL_MIN * 10  < tmp_area.r_last && 
+		(tmp_area.i_begin + DBL_MIN * 10 < tmp_area.i_last))
 	{
-		fract->i_area.r_begin = center.r - r_distance * ratio.r;
-		fract->i_area.r_last = center.r + r_distance * (1 - ratio.r);
-		fract->i_area.i_begin = center.i - i_distance * ratio.i;
-		fract->i_area.i_last = center.i + i_distance * (1 - ratio.i);
+		fract->i_area = tmp_area;
 		set_step(fract);
 	}
-	printf("after change:r_begin=%f, r_last=%f,i_begin=%f, i_last=%f, step.r=%f, step.i=%f\n ",fract->i_area.r_begin,fract->i_area.r_last,fract->i_area.i_begin, fract->i_area.i_last,fract->step.r,fract->step.i);
-	printf("after r_distance:%f  ratio.r:%f, i_distance:%f  ratio.i:%f\n", r_distance, ratio.r, i_distance, ratio.i);
 }
 
 /*

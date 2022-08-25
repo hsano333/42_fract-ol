@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 01:31:35 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/23 14:34:22 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/25 16:46:34 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,11 @@ void	mapping_address( t_fract *fract)
 	int		color;
 	t_point		point;
 
+
+	//mlx_string_put(fract->mlx, fract->window, fract->w_width * 0.5 , fract->w_height * 0.5, 0xffffffff, "Calculating"   );
+	//mlx_string_put(fract->mlx, fract->window, fract->w_width * 0.75 , fract->w_height * 0.75, 0x00, "Calculating"   );
+	//mlx_put_image_to_window(fract->mlx, fract->window, fract->image_info.image, 80, 80);
+
 	point.y = fract->w_height;
 	while (point.y--)
 	{
@@ -65,8 +70,8 @@ int	create_image(t_fract *fract)
 	//int	sl1;
 	//int	endian1;
 
-	if (fract->image_info.image)
-		mlx_destroy_image(fract->mlx, fract->image_info.image);
+	fract->diversion_count = 0;
+	fract->near_diversion_count = 0;
 	if (!(fract->image_info.image = mlx_new_image(fract->mlx, IMAGE_WIDTH, IMAGE_HEIGHT)))
 	{
 		fract->error = MEMORY_ERROR;
@@ -75,18 +80,38 @@ int	create_image(t_fract *fract)
 	}
 	fract->image_info.addr = mlx_get_data_addr(fract->image_info.image, &fract->image_info.bpp, 
 			&fract->image_info.sl, &fract->image_info.endian);
-	ft_printf("bpp1=%d, sl1=%d, endian1=%d\n",fract->image_info.bpp, fract->image_info.sl, fract->image_info.endian);
 	mapping_address(fract);
-	mlx_put_image_to_window(fract->mlx, fract->window, fract->image_info.image, 80, 80);
+	float tmp_ratio;
+	tmp_ratio = 0;
+	if (fract->diversion_count > 0)
+		tmp_ratio = (float)(100 * fract->near_diversion_count) / fract->diversion_count;
+	if (tmp_ratio >= DIVERSION_COUNT_UP_THORESHOLD)
+		fract->iteration_max += 2 + (tmp_ratio * 10);
+	else if ((tmp_ratio < DIVERSION_COUNT_DOWN_THORESHOLD) && (fract->iteration_max > INTERATION_INIT) && fract->zoom_count > 0)
+	{
+		fract->iteration_max -= (fract->iteration_max - INTERATION_INIT)/fract->zoom_count ;
+	}
+
+	printf("bpp1=%d, sl1=%d, endian1=%d,fract->diversion_count=%d,fract->near_diversion_count=%d ,tmp_ratio=%lf\n",fract->image_info.bpp, fract->image_info.sl, fract->image_info.endian,fract->diversion_count, fract->near_diversion_count,tmp_ratio);
+	//if (diversion_count > )
+	//mlx_put_image_to_window(fract->mlx, fract->window, fract->image_info.image, 80, 80);
+	//mlx_string_put(fract->mlx, fract->window, fract->w_width * 0.5 , fract->w_height * 0.5, 0xffffffff, "Calculating2"   );
+	//mlx_string_put(fract->mlx, fract->window, fract->w_width * 0.75 , fract->w_height * 0.75, 0x00, "Calculating3"   );
 	return (true);
 
 }
 
-/*
-void	update_image()
+int	update_image(t_fract *fract)
 {
-
+	//printf("loop update image No.1\n");
+	if (!fract->update_image_flag)
+		return (false);
+	//printf("loop update image No.2\n");
+	if (fract->create_image_flag)
+		create_image(fract);
+	printf("update image offset:x=%d, y=%d\n", fract->offset.x, fract->offset.y);
+	mlx_put_image_to_window(fract->mlx, fract->window, fract->image_info.image, fract->offset.x, fract->offset.y);
+	fract->update_image_flag = false;
+	fract->create_image_flag = false;
+	return (true);
 }
-*/
-
-

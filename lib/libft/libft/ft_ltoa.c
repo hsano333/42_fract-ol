@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_ltoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
+/*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/14 23:51:46 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/25 20:02:25 by hsano            ###   ########.fr       */
+/*   Created: 2022/08/25 20:03:06 by hsano             #+#    #+#             */
+/*   Updated: 2022/08/25 20:51:42 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	get_count(char *p, int n)
+static size_t	get_count(char *p, long n)
 {
-	long	a;
+	long long	a;
 	size_t	i;	
 	size_t	cnt;
 
@@ -22,7 +22,7 @@ static size_t	get_count(char *p, int n)
 	cnt = 0;
 	if (n < 0)
 	{
-		a = -1 * (long)n;
+		a = -1 * (long long)n;
 		cnt++;
 	}
 	else
@@ -38,7 +38,7 @@ static size_t	get_count(char *p, int n)
 	return (cnt);
 }
 
-static void	ft_itoa_no_memory(int n, char *p, char *r)
+static void	ft_itoa_no_memory(long n, char *p, char *r)
 {
 	size_t	i;
 	size_t	cnt;
@@ -47,6 +47,11 @@ static void	ft_itoa_no_memory(int n, char *p, char *r)
 	{
 		r[0] = '0';
 		r[1] = '\0';
+		return ;
+	}
+	else if (n == LONG_MIN)
+	{
+		ft_strlcpy(r, "-9223372036854775808", 21);
 		return ;
 	}
 	cnt = get_count(p, n);
@@ -59,23 +64,25 @@ static void	ft_itoa_no_memory(int n, char *p, char *r)
 	}
 }
 
-void	ft_putnbr_fd(int n, int fd)
+char	*ft_ltoa(long n, char *r)
 {
-	char	p[20];
-	char	r[20];
+	char	p[30];
 
-	ft_itoa_no_memory(n, &(p[0]), &(r[0]));
-	ft_putstr_fd(r, fd);
+	ft_itoa_no_memory(n, p, &(r[0]));
+	return (r);
 }
 //#include <stdlib.h>
 //int main(int argc, char **argv)
 //{
-//	int c;
+//	char tmp[100];
+//	long c;
 //	int	fd;
-//	if (argc == 3)
+//	if (argc == 2)
 //	{
-//		c = atoi(argv[1]);
-//		fd = atoi(argv[2]);
-//		ft_putnbr_fd(c, fd);
+//		c = atol(argv[1]);
+//		ft_ltoa(c, tmp);
+//		printf("c=%ld, result=%s\n", c, tmp);
+//		//fd = atoi(argv[2]);
+//		//ft_putnbr_fd(c, fd);
 //	}
 //}
