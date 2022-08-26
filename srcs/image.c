@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 01:31:35 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/25 16:46:34 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/25 21:12:58 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	mapping_address( t_fract *fract)
 		while (point.x--)
 		{
 			color = mlx_get_color_value(fract->mlx, fract->get_color(fract, point));
+			//color = fract->get_color(fract, point);
 			mapping_color(fract, ptr, point.x, color);
 		}
 	}

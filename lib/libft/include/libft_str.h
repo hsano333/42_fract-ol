@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 14:53:05 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/25 20:52:12 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/26 14:33:15 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define LIBFT_STR_H
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_atoi(const char *str, int *long_over_flag);
+long	ft_atol(const char *str, int *long_over_flag);
+float	ft_atof(const char *str, int *error);
+double	ft_atod(const char *str, int *error);
 char	*ft_itoa(int n);
 char	*ft_strdup(const char *s1);
 char	*ft_strchr(const char *s, int c);
@@ -29,4 +32,5 @@ size_t	ft_strlen(const char *s);
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	*ft_ltoa(long n, char *p);
+float	ft_atof(const char *str, int *error);
 #endif

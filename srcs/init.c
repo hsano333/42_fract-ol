@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 02:55:18 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/25 19:39:53 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/26 20:35:46 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "libft_mem.h"
 #include "libft_mem.h"
 #include "image.h"
+#include "color.h"
 
 static int	set_fract(char **argv, t_fract *fract)
 {
@@ -51,15 +52,16 @@ static int	set_option(int argc, char **argv, t_fract *fract)
 
 	if (argc <= 2)
 		return (true);
-	fract->speed_thoreshold = ft_atoi(argv[3], &error);
-	if (fract->speed_thoreshold <= 0)
+	fract->c.r = (long double)ft_atod(argv[2], &error);
+	printf("fract->c.r=%.10Lf\n",fract->c.r);
+	if (error == true || fract->c.r > 2 || fract->c.r < -2)
 		fract->error = ARGV_ERROR;
 	if (argc == 3)
 		return (true);
-	fract->iteration_max = ft_atoi(argv[4], &error);
-	if (fract->iteration_max <= 0)
+	fract->c.i = (long double)ft_atod(argv[3], &error);
+	printf("fract->c.i=%.10Lf\n",fract->c.i);
+	if (error == true || fract->c.i > 2 || fract->c.i < -2)
 		fract->error = ARGV_ERROR;
-
 	return (true);
 }
 int	expose_win(void *p)
@@ -279,6 +281,8 @@ void	set_init_value(t_fract * fract)
 	fract->c.r = -0.12;
 	fract->offset.x = (W_WIDTH - IMAGE_WIDTH) / 4;
 	fract->offset.y = (W_HEIGHT - IMAGE_HEIGHT) / 4;
+	fract->offset.y = (W_HEIGHT - IMAGE_HEIGHT) / 4;
+	fract->calc_color = (int (*)())calc_color1;
 	//fract->c.r = 0.25;
 	//fract->c.i = 0;
 	set_step(fract);

@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 11:37:22 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/25 20:57:38 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/25 21:04:02 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ void	scroll_action(t_fract *fract, int x, int y,  int zoom_mode)
 	update_display_area(fract, point, ratio, offset);
 	//create_image(fract);
 	mlx_string_put(fract->mlx, fract->window, IMAGE_WIDTH * 0.5, IMAGE_HEIGHT * 0.5, 0xffffffff, "Calculating");
-	mlx_string_put(fract->mlx, fract->window, IMAGE_WIDTH * 0.5, IMAGE_HEIGHT * 0.55, 0xffffffff, "ZOOM ");
+	mlx_string_put(fract->mlx, fract->window, IMAGE_WIDTH * 0.5, IMAGE_HEIGHT * 0.53, 0xffffffff, "ZOOM: ");
 	//ft_strlcpy(zoom_str, , );
-	mlx_string_put(fract->mlx, fract->window, IMAGE_WIDTH * 0.575, IMAGE_HEIGHT * 0.55, 0xffffffff, zoom_str);
+	mlx_string_put(fract->mlx, fract->window, IMAGE_WIDTH * 0.55, IMAGE_HEIGHT * 0.53, 0xffffffff, zoom_str);
 	fract->update_image_flag = true;
 	fract->create_image_flag = true;
 	//t_xvar *tmp;

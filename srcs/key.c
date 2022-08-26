@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 09:11:31 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/25 17:38:30 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/26 20:39:07 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "key.h"
 #include "ft_printf.h"
 #include "math.h"
+#include "color.h"
 
 
 void	reset_image(t_fract *fract)
@@ -69,7 +70,26 @@ void	update_offset(int key, t_fract *fract)
 		fract->create_image_flag = true;
 	}
 	printf("not moving No.2 over reset x=%d, y=%d, offset x=%d, y=%d",point.x, point.y,fract->offset.x, fract->offset.y);
+	((t_fract*)fract)->lock = true;
 	fract->update_image_flag = true;
+}
+
+void	set_calc_method(t_fract *fract)
+{
+	if (fract->calc_color == (int (*)())calc_color1)
+		fract->calc_color = (int (*)())calc_color2;
+	else if (fract->calc_color == (int (*)())calc_color2)
+		fract->calc_color = (int (*)())calc_color3;
+	else if (fract->calc_color == (int (*)())calc_color3)
+		fract->calc_color = (int (*)())calc_color4;
+	else if (fract->calc_color == (int (*)())calc_color4)
+		fract->calc_color = (int (*)())calc_color5;
+	else if (fract->calc_color == (int (*)())calc_color5)
+		fract->calc_color = (int (*)())calc_color1;
+	fract->create_image_flag = true;
+	((t_fract*)fract)->lock = true;
+	fract->update_image_flag = true;
+
 }
 
 int	hook_key(int key,void *fract)
@@ -78,10 +98,9 @@ int	hook_key(int key,void *fract)
 		return (false);
 
 	if (key == ARROW_LEFT || key == ARROW_UP || key == ARROW_RIGHT || key == ARROW_DOWN) 
-	{
 		update_offset(key, ((t_fract *)fract));
-		((t_fract*)fract)->lock = true;
-	}
+	else if (key == C_KEY)
+		set_calc_method(fract);
 	else if (key == ESC)
 		close_fract(fract);
 	else if (key == R_KEY)

@@ -6,13 +6,13 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 22:42:24 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/06 18:08:13 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/26 15:54:44 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	get_digit_len(const char *str, size_t i)
+size_t	get_digit_len(const char *str, size_t i)
 {
 	size_t	len;
 
@@ -27,7 +27,7 @@ static size_t	get_digit_len(const char *str, size_t i)
 	return (len - i);
 }
 
-static size_t	get_start_index(const char *str, int *minus)
+size_t	get_start_index(const char *str, int *minus)
 {
 	size_t	i;
 
@@ -52,7 +52,7 @@ static size_t	get_start_index(const char *str, int *minus)
 	return (i);
 }
 
-static size_t	ft_iterative_power(long nb, long power)
+size_t	ft_iterative_power(long nb, long power)
 {
 	size_t	rval;
 	size_t	old;
@@ -89,6 +89,7 @@ int	ft_atoi(const char *str, int *long_over_flag)
 	size_t	sum;
 	size_t	a;
 
+	*long_over_flag = true;
 	i = remove_zero(str, get_start_index(str, &minus));
 	sum = 0;
 	len = get_digit_len(str, i);
@@ -98,7 +99,6 @@ int	ft_atoi(const char *str, int *long_over_flag)
 		sum += (str[i++] - '0') * a;
 		if (sum > LONG_MAX)
 		{
-			*long_over_flag = true;
 			sum = -1;
 			if (minus == -1 || sum == (LONG_MAX))
 				minus = 0;
@@ -106,6 +106,7 @@ int	ft_atoi(const char *str, int *long_over_flag)
 		}
 		a /= 10;
 	}
+	*long_over_flag = false;
 	return ((int)(sum * minus));
 }
 //#include <stdio.h>
