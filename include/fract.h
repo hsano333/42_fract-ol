@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 03:01:01 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/26 20:30:16 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/28 11:01:25 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ enum	e_fract{
 	INVALID,
 	MANDELBROT,
 	JULIA,
+	KOCH,
+	GASKET,
 };
 
 enum	s_error{
@@ -71,6 +73,7 @@ typedef struct s_iarea {
 
 typedef struct s_image {
 	void	*image;
+	void	*old_image;
 	void	*addr;
 	int	endian;
 	int	bpp;
@@ -83,6 +86,7 @@ typedef struct s_fract {
 	void	*window;
 	void	*mlx;
 	t_image	image_info;
+	void	*image_backup;
 	t_iarea	i_area;
 	int	w_width;
 	int	w_height;
@@ -91,13 +95,15 @@ typedef struct s_fract {
 	int	iteration_max;
 	int	diversion_count;
 	int	near_diversion_count;
-	int	(*get_color)(void *, t_point);
+	//int	(*get_color)(void *, t_point);
+	int	(*get_image)(void *);
 	int	(*calc_color)(int, int , int);
 	long	zoom_count;
 	int	tmp;
 	int	lock;
 	int	update_image_flag;
 	int	create_image_flag;
+	int	local_endian;
 	t_ipoint	step;
 	t_ipoint	c;
 	t_point		offset;

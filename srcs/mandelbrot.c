@@ -6,12 +6,13 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 02:22:23 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/26 20:29:53 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/27 18:33:01 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fract.h"
 #include "color.h"
+#include "image.h"
 
 int	get_mandelbrot_color(t_fract *fract, t_point w_point)
 {
@@ -85,4 +86,10 @@ int	get_mandelbrot_color(t_fract *fract, t_point w_point)
 	//if (fract->speed_thoreshold)
 	//ft_printf("mandelbrot x:%d, y:%d   width:%d\n", x, y, fract->w_width);
 	return (color);
+}
+
+int	get_mandelbrot_image(t_fract *fract)
+{
+	loop_xy(fract, get_mandelbrot_color);
+	return (true);
 }

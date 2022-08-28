@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 02:41:17 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/25 11:40:24 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/27 19:27:28 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,19 @@
 #include "float.h"
 
 //void	draw_mandelbrot(void *image, t_fract *fract);
-int	get_julia_color(t_fract *fract, t_point point);
-int	get_mandelbrot_color(t_fract *fract, t_point point);
+//int	get_julia_color(t_fract *fract, t_point point);
+//int	get_mandelbrot_color(t_fract *fract, t_point point);
+//int	get_gasket_color(t_fract *fract, t_point w_point);
+int	get_julia_image(t_fract *fract);
+int	get_mandelbrot_image(t_fract *fract);
+int	get_gasket_image(t_fract *fract);
+int	get_koch_image(t_fract *fract);
 //void	draw_julia(void *image, t_fract *fract);
 int	create_image(t_fract *fract);
 void	set_step(t_fract *fract);
 int	update_image(t_fract *fract);
-
+//int	get_color(t_fract *fract, int x, int y);
+int	is_black(t_fract *fract, int x, int y);
+void	loop_xy(t_fract *fract, int (*get_color)(t_fract*, t_point));
+t_img	*copy_image(t_fract *fract, t_img *image);
 #endif

@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 05:38:17 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/25 18:16:21 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/28 16:47:32 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	close_fract(t_fract *fract)
 	ft_printf("close_fracti test No1\n");
 	if (fract->image_info.image)
 		mlx_destroy_image(fract->mlx, fract->image_info.image);
+	if (fract->image_backup)
+		mlx_destroy_image(fract->mlx, fract->image_backup);
 	mlx_destroy_window(fract->mlx, fract->window);
 	exit(0);
 
