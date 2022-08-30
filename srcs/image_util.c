@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   affine.h                                           :+:      :+:    :+:   */
+/*   image_util.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/28 17:46:03 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/29 18:23:22 by hsano            ###   ########.fr       */
+/*   Created: 2022/08/30 05:51:05 by hsano             #+#    #+#             */
+/*   Updated: 2022/08/30 06:16:00 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fract.h"
+#include <fract.h>
 
-typedef struct s_matrix {
-	double	a;
-	double	b;
-	double	c;
-	double	d;
-	double	e;
-	double	f;
-}	t_matrix;
+t_ipoint	transform_ri(t_fract *fract, int x, int y)
+{
+	t_ipoint point;
+	point.r = fract->i_area.r_begin + fract->step.r * x;
+	point.i = fract->i_area.i_begin + fract->step.i * y;
 
-//void	affine(t_fract *fract, void *dest_addr, t_matrix matrix);
-//void	affine(t_fract *fract, void *dest_addr, t_point offset,  t_matrix matrix);
-t_point	affine(t_fract *fract, void *dest_addr, t_point offset,  t_matrix matrix);
+	return (point);
+}

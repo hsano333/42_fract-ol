@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 02:41:17 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/27 19:27:28 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/30 06:16:13 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,11 @@ int	create_image(t_fract *fract);
 void	set_step(t_fract *fract);
 int	update_image(t_fract *fract);
 //int	get_color(t_fract *fract, int x, int y);
-int	is_black(t_fract *fract, int x, int y);
+//int	is_black(t_fract *fract, int x, int y);
+int	is_black(t_fract *fract, void *addr,  int x, int y);
 void	loop_xy(t_fract *fract, int (*get_color)(t_fract*, t_point));
 t_img	*copy_image(t_fract *fract, t_img *image);
+void	overlapping_image(t_fract *fract, t_img *image, t_point offset);
+void	clear_image(t_fract *fract, t_img *image);
+t_ipoint	transform_ri(t_fract *fract, int x, int y);
 #endif

@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 03:01:01 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/28 11:01:25 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/29 10:35:29 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ typedef struct s_fract {
 	int	iteration_max;
 	int	diversion_count;
 	int	near_diversion_count;
-	//int	(*get_color)(void *, t_point);
 	int	(*get_image)(void *);
 	int	(*calc_color)(int, int , int);
 	long	zoom_count;
@@ -104,6 +103,8 @@ typedef struct s_fract {
 	int	update_image_flag;
 	int	create_image_flag;
 	int	local_endian;
+	int	defalut_color;
+	fract_type	base_size;
 	t_ipoint	step;
 	t_ipoint	c;
 	t_point		offset;
