@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 11:37:22 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/25 21:04:02 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/30 08:52:53 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	scroll_action(t_fract *fract, int x, int y,  int zoom_mode)
 	point.y = fract->w_height - y - 1;
 	offset.x = 0;
 	offset.y = 0;
-	tmp = (100 * (R_END - R_START) / (fract->i_area.r_last - fract->i_area.r_begin) ) / ratio;
+	tmp = (100 * (fract->i_area_base.r_last - fract->i_area_base.r_begin) / (fract->i_area.r_last - fract->i_area.r_begin) ) / ratio;
 	//char *zoom_str2 = ft_itoa(100);
 	//printf("%s\n", zoom_str2);
 	ft_ltoa((long)(tmp / 100), zoom_str);

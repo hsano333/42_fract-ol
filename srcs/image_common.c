@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 09:14:25 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/29 20:25:26 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/30 18:26:48 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	is_black(t_fract *fract, void *addr,  int x, int y)
 
 void	clear_image(t_fract *fract, t_img *image)
 {
-	unsigned char*	src_ptr;
+	unsigned int*	src_ptr;
 	//unsigned int*	dst_ptr;
 	t_point	point;
 	void	*addr;
@@ -153,24 +153,26 @@ void	overlapping_image(t_fract *fract, t_img *image, t_point offset)
 	}
 }
 
-t_img	*copy_image(t_fract *fract, t_img *dst_image)
+void	*copy_image(t_fract *fract)
 {
 	unsigned int*	source_ptr;
 	unsigned int*	dst_ptr;
 	t_point	point;
 	void	*addr;
-	int	sl;
-	int	bpp;
+	void	*new_image;
 
-	addr = mlx_get_data_addr(dst_image, &bpp, &sl, &fract->image_info.endian);
+	new_image = (void *)mlx_new_image(fract->mlx, IMAGE_WIDTH, IMAGE_HEIGHT);
+	if (!new_image)
+		close_fract(fract);
+	addr = mlx_get_data_addr(new_image, &fract->image_info.bpp, &fract->image_info.sl, &fract->image_info.endian);
 	point.y = fract->w_height;
 	while (point.y--)
 	{
-		dst_ptr = addr + sl * (fract->w_height - point.y - 1);
+		dst_ptr = addr + fract->image_info.sl * (fract->w_height - point.y - 1);
 		source_ptr = fract->image_info.addr + fract->image_info.sl * (fract->w_height - point.y - 1);
 		point.x = fract->w_width;
 		while (point.x--)
 			dst_ptr[point.x] = source_ptr[point.x];
 	}
-	return (addr);
+	return (new_image);
 }

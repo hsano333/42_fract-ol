@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 02:55:18 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/29 19:10:23 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/30 08:51:27 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,7 @@ void	set_init_value(t_fract * fract)
 	fract->i_area.r_last = R_END;
 	fract->i_area.i_begin = I_START;
 	fract->i_area.i_last = I_END;
+	fract->i_area_base = fract->i_area;
 	fract->c.r = -0.12;
 	fract->c.i = 0.74;
 	fract->c.r = -0.12;

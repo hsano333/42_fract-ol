@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 17:31:41 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/30 08:00:06 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/30 19:38:36 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "image.h"
 #include "affine.h"
 #include "math.h"
+#include "libft_mem.h"
 
 #define TRIANGLE_LENGTH 420
 #define TRIANGLE_OFFSET_X  150
@@ -24,25 +25,18 @@ int	draw_triangle(t_fract *fract, t_point point)
 {
 	double	a1;
 	double	b1;
-	//double	c1;
 	t_ipoint	tmp_point;
 	t_ipoint	base_point;
 
-	//base_point = transform_ri(fract, TRIANGLE_OFFSET_X, TRIANGLE_OFFSET_Y);
 	base_point.r = TRIANGLE_OFFSET_X;
 	base_point.i = TRIANGLE_OFFSET_Y;
-	//base_point.i = TRIANGLE_OFFSET_Y;
 	tmp_point = transform_ri(fract, point.x, point.y);
-	//tmp_point.r = point.x - fract->i_area.r_begin;
-	//tmp_point.i = point.y - fract->i_area.i_begin;
 	{
-		//if ((base_point.i < tmp_point.i) && (base_point.i > tmp_point.i + tmp_point.i * sqrt(3) / 2))
 		if ((base_point.i < tmp_point.i))
 		{
 
 			a1 = sqrt(3);
 			b1 = TRIANGLE_LENGTH / sqrt(3);
-			//b1 = transform_ri(fract, 0, (TRIANGLE_OFFSET_Y - IMAGE_HEIGHT / 2)).i - transform_ri(fract, (TRIANGLE_OFFSET_X - IMAGE_WIDTH / 2), 0).r * a1;
 			if ((a1 * tmp_point.r + b1 > tmp_point.i) && ( b1 - a1 * tmp_point.r > tmp_point.i))
 			{
 					return (fract->defalut_color);
@@ -82,15 +76,16 @@ static	t_matrix get_matrix(int mode)
 {
 	t_matrix	matrix;
 
+	ft_memset(&matrix, 0, sizeof(matrix));
 	if (mode == 0)
 	{
 		matrix.a = (double)1 / 2;
-		matrix.b = 0;
-		matrix.c = 0;
 		matrix.d = (double)1 / 2;
-		matrix.e = 0;
-		matrix.f = 0;
-		matrix.e = 0;
+	}
+	else if (mode == 1)
+	{
+		matrix.a = 1;
+		matrix.d = 1;
 	}
 	else if (mode == 1 || mode == 3)
 	{
@@ -267,70 +262,83 @@ void	calc_koch(t_fract *fract, void *new_addr)
 	printf("end update koch \n");
 }
 
-int	update_koch(t_fract *fract)
+int	update_koch(t_fract *fract, int matrix_mode)
 {
 	t_img	*new_image ;
-	t_img	*new_image2 ;
 	void	*new_addr;
-	void	*new_addr2;
 	t_point offset;
 	t_matrix	matrix;
-	t_point	edge_point;
+	t_area	edge_area;
 
 	new_image = (void *)mlx_new_image(fract->mlx, IMAGE_WIDTH, IMAGE_HEIGHT);
 	if (!new_image)
 		close_fract(fract);
-	new_image2 = (void *)mlx_new_image(fract->mlx, IMAGE_WIDTH, IMAGE_HEIGHT);
-	if (!new_image2)
-	{
-		mlx_destroy_image(fract->mlx, new_image);
-		close_fract(fract);
-	}
 	new_addr = mlx_get_data_addr(new_image, &fract->image_info.bpp, &fract->image_info.sl, &fract->image_info.endian);
-	new_addr2 = mlx_get_data_addr(new_image2, &fract->image_info.bpp, &fract->image_info.sl, &fract->image_info.endian);
-
-	offset.x = 0;
+	offset.y = TRIANGLE_LENGTH / sqrt(3) * 0.5 - IMAGE_HEIGHT * 0.5;
+	offset.x = -IMAGE_WIDTH * 0.5;
+	matrix = get_matrix(matrix_mode);
+	edge_area =  affine(fract, new_addr, offset, matrix);
+	clear_image(fract, fract->image_info.image);
+	offset.x = -edge_area.x_begin + TRIANGLE_OFFSET_X / 2;
 	offset.y = 0;
-	matrix = get_matrix(0);
-
-	clear_image(fract, new_image);
-	edge_point =  affine(fract, new_addr, offset, matrix);
-	printf("offset x=%d, y=%d   %f, %f, %f, %f, %f, %f\n",edge_point.x, edge_point.y,   matrix.a, matrix.b, matrix.c , matrix.d, matrix.e, matrix.f);
-	offset.x = TRIANGLE_OFFSET_X - edge_point.x + 1;
-	offset.y = TRIANGLE_OFFSET_Y - (IMAGE_HEIGHT - edge_point.y);
-	mlx_destroy_image(fract->mlx, fract->image_info.image);
-	fract->image_info.image = new_image2;
-	fract->image_info.addr = new_addr2;
 	overlapping_image(fract, new_image, offset);
-	offset.x = TRIANGLE_OFFSET_X - edge_point.x + 1 + TRIANGLE_LENGTH / 2;
-	offset.y = TRIANGLE_OFFSET_Y - (IMAGE_HEIGHT - edge_point.y);
-	//offset.x = TRIANGLE_OFFSET_X - edge_point.x + TRIANGLE_LENGTH / 2 + 1;
-	//offset.y = TRIANGLE_OFFSET_Y - (IMAGE_HEIGHT - edge_point.y);
+	offset.x += edge_area.x_last - edge_area.x_begin + 1 ;
+	offset.y += 0;
 	overlapping_image(fract, new_image, offset);
-	offset.x = TRIANGLE_OFFSET_X - edge_point.x + 1 + TRIANGLE_LENGTH / 4;
-	offset.y = TRIANGLE_OFFSET_Y - (IMAGE_HEIGHT - edge_point.y) + TRIANGLE_LENGTH / 4 * sqrt(3);
-	//offset.x = TRIANGLE_OFFSET_X - edge_point.x + TRIANGLE_LENGTH / 4 + 1;
-	//offset.y = TRIANGLE_OFFSET_Y - edge_point.y + TRIANGLE_LENGTH / 4 * sqrt(3) + 1;
+	offset.x -= (edge_area.x_last - edge_area.x_begin) / 2;
+	offset.y += ((edge_area.y_last - edge_area.y_begin) + 1) ;
 	overlapping_image(fract, new_image, offset);
-	//mlx_destroy_image(fract->mlx, tmp_image);
-
 	mlx_destroy_image(fract->mlx, new_image);
-	//fract->image_info.image = new_image;
-	//fract->image_info.addr = new_addr;
-	/*
-	//new_addr = copy_image(fract, new_image);
-	new_addr = mlx_get_data_addr(new_image, &fract->image_info.bpp, &fract->image_info.sl, &fract->image_info.endian);
-	//fract->image_info.addr = mlx_get_data_addr(fract->image_info.image, &fract->image_info.bpp, 
-			//&fract->image_info.sl, &fract->image_info.endian);
-	calc_koch(fract, new_addr);
-	mlx_destroy_image(fract->mlx, fract->image_info.image);
-	fract->image_info.image = new_image;
-	fract->image_info.addr = new_addr;
-	*/
 
-	//printf("%p,%p\n", fract, new_image);
-	//mlx_destroy_image(fract->mlx, new_image);
+	fract->image_info.edge_area = edge_area;
 	return (true);
+}
+
+void	set_init(t_fract *fract)
+{
+	fract->i_area.r_begin = -TRIANGLE_LENGTH;
+	fract->i_area.r_last = TRIANGLE_LENGTH;
+	fract->i_area.i_begin = -TRIANGLE_LENGTH;
+	fract->i_area.i_last = TRIANGLE_LENGTH;
+	fract->i_area_base = fract->i_area;
+
+}
+
+void	zoom_koch(t_fract *fract)
+{
+	t_point offset;
+	t_area	edge_area;
+	/*
+	t_img	*new_image ;
+	void	*new_addr;
+	t_matrix	matrix;
+
+	new_image = (void *)mlx_new_image(fract->mlx, IMAGE_WIDTH, IMAGE_HEIGHT);
+	if (!new_image)
+		close_fract(fract);
+	new_addr = mlx_get_data_addr(new_image, &fract->image_info.bpp, &fract->image_info.sl, &fract->image_info.endian);
+	offset.x = -edge_area.x_begin + TRIANGLE_OFFSET_X;
+	offset.y = 0;
+	matrix = get_matrix(1);
+	edge_area =  affine(fract, new_addr, offset, matrix);
+	*/
+	edge_area = fract->image_info.edge_area;
+	offset.x = -edge_area.x_begin + TRIANGLE_OFFSET_X;
+	offset.y = 0;
+	//overlapping_image(fract, new_image, offset);
+	offset.x = (edge_area.x_last - edge_area.x_begin) * 2 + 1 ;
+	offset.y = 0;
+	overlapping_image(fract, fract->image_info.backup_image, offset);
+	offset.x -= (edge_area.x_last - edge_area.x_begin);
+	offset.y += ((edge_area.y_last - edge_area.y_begin) * 2 + 1) ;
+	overlapping_image(fract, fract->image_info.backup_image, offset);
+
+	//matrix = get_matrix(0);
+	////printf("zzom :%p\n",fract);
+	//new_addr = mlx_get_data_addr(fract->image_info.backup_image, &fract->image_info.bpp, &fract->image_info.sl, &fract->image_info.endian);
+	//edge_area =  affine(fract, new_addr, offset, matrix);
+	//update_koch(fract, 1);
+
 }
 
 int	get_koch_image(t_fract *fract)
@@ -339,28 +347,62 @@ int	get_koch_image(t_fract *fract)
 
 	point.x = 0;
 	point.y = 0;
-	fract->zoom_count++;
-	fract->zoom_count--;
 	if (fract->iteration_max == INTERATION_INIT)
 	{
+		set_init(fract);
 		/*
-		fract->i_area.r_begin = -(IMAGE_WIDTH / 2);
-		fract->i_area.r_last = (IMAGE_WIDTH / 2);
-		fract->i_area.i_begin = -(IMAGE_HEIGHT / 2);
-		fract->i_area.i_last = (IMAGE_HEIGHT / 2);
-		*/
 		fract->i_area.r_begin = -TRIANGLE_LENGTH;
 		fract->i_area.r_last = TRIANGLE_LENGTH;
 		fract->i_area.i_begin = -TRIANGLE_LENGTH;
 		fract->i_area.i_last = TRIANGLE_LENGTH;
+		*/
 		update_display_area(fract, point, 1, point);
-		printf("init triangle\n");
 		loop_xy(fract, draw_triangle);
-		//init_triangle(fract);
-		//loop_xy(fract, init_triangle);
+		update_koch(fract, 0);
+		update_koch(fract, 0);
+		update_koch(fract, 0);
+		update_koch(fract, 0);
+		update_koch(fract, 0);
+		update_koch(fract, 0);
+		update_koch(fract, 0);
+		update_koch(fract, 0);
+		fract->image_info.backup_image = copy_image(fract);
 		return (true);
 	}
-	printf("upteade koch\n");
-		//init_triangle(fract);
-	return (update_koch(fract));
+
+	//update_display_area(fract, point, 1, point);
+	/*
+	loop_xy(fract, draw_triangle);
+	update_koch(fract);
+	update_koch(fract);
+	update_koch(fract);
+	update_koch(fract);
+	update_koch(fract);
+	update_koch(fract);
+	*/
+		//loop_xy(fract, draw_triangle);
+		//update_koch(fract, 0);
+		//update_koch(fract, 0);
+		//update_koch(fract, 0);
+		//update_koch(fract, 0);
+		//update_koch(fract, 0);
+		//update_koch(fract, 0);
+		//update_koch(fract, 0);
+		//update_koch(fract, 0);
+		//update_koch(fract, 0);
+		//fract->image_info.backup_image = copy_image(fract);
+		/*
+	zoom_koch(fract);
+	zoom_koch(fract);
+	zoom_koch(fract);
+	zoom_koch(fract);
+	zoom_koch(fract);
+	zoom_koch(fract);
+	zoom_koch(fract);
+	zoom_koch(fract);
+	zoom_koch(fract);
+	*/
+	zoom_koch(fract);
+	return (0);
+	//return (update_koch(fract));
 }

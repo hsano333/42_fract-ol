@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 03:01:01 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/29 10:35:29 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/30 19:00:15 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,13 @@ typedef struct s_ipoint {
 	fract_type	i;
 }	t_ipoint;
 
+typedef struct s_area {
+	int	x_begin;
+	int	x_last;
+	int	y_begin;
+	int	y_last;
+}	t_area;
+
 typedef struct s_iarea {
 	fract_type	r_begin;
 	fract_type	r_last;
@@ -73,11 +80,12 @@ typedef struct s_iarea {
 
 typedef struct s_image {
 	void	*image;
-	void	*old_image;
+	void	*backup_image;
 	void	*addr;
 	int	endian;
 	int	bpp;
 	int	sl;
+	t_area	edge_area;
 }	t_image;
 
 
@@ -88,6 +96,7 @@ typedef struct s_fract {
 	t_image	image_info;
 	void	*image_backup;
 	t_iarea	i_area;
+	t_iarea	i_area_base;
 	int	w_width;
 	int	w_height;
 	int	error;
