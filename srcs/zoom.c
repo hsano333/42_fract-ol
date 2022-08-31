@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 19:46:38 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/30 19:53:47 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/30 20:24:59 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,16 @@ void	zoom_action(t_fract *fract, int x, int y,  int zoom_mode)
 	t_point	point;
 	t_point offset;
 	ratio = ZOOM_RATIO;
-	//mlx_disble_mouse_hook(fract->window, hook_mouse, fract);
-	//mlx_hook(fract->window, 3, ButtonPressMask, close_fract, fract);
-	/*
-	mlx_hook(fract->window, 3, ButtonPressMask, close_fract, fract);
-	mlx_hook(fract->window, 4, ButtonPressMask, close_fract, fract);
-	mlx_hook(fract->window, 5, ButtonPressMask, close_fract, fract);
-	*/
 
-	//mlx_put_image_to_window(fract->mlx, fract->window, fract->image_info.image, 0, 0);
 	if (zoom_mode == ZOOM_IN)
 		ratio = 1/ratio;
 	point.x = x;
 	point.y = fract->w_height - y - 1;
 	offset.x = 0;
 	offset.y = 0;
-	tmp = (100 * (fract->i_area_base.r_last - fract->i_area_base.r_begin) / (fract->i_area.r_last - fract->i_area.r_begin) ) / ratio;
+	fract->zoom_ratio = ((fract->i_area_base.r_last - fract->i_area_base.r_begin) / (fract->i_area.r_last - fract->i_area.r_begin) ) / ratio;
+	printf("fract->zoom_ratio=%Lf\n", fract->zoom_ratio);
+	tmp = (long)(fract->zoom_ratio * 100);
 	//char *zoom_str2 = ft_itoa(100);
 	//printf("%s\n", zoom_str2);
 	ft_ltoa((long)(tmp / 100), zoom_str);

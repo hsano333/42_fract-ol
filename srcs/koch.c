@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 17:31:41 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/30 19:38:36 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/30 20:37:45 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,48 +72,43 @@ int	draw_triangle(t_fract *fract, t_point point)
 //	return (0);
 //}
 
-static	t_matrix get_matrix(int mode)
+static	t_matrix get_matrix(int mode, fract_type magnification)
 {
 	t_matrix	matrix;
 
 	ft_memset(&matrix, 0, sizeof(matrix));
 	if (mode == 0)
 	{
-		matrix.a = (double)1 / 2;
-		matrix.d = (double)1 / 2;
-	}
-	else if (mode == 1)
-	{
-		matrix.a = 1;
-		matrix.d = 1;
+		matrix.a = magnification;
+		matrix.d = magnification;
 	}
 	else if (mode == 1 || mode == 3)
 	{
-		matrix.a = (double)1 / 3;
+		matrix.a = (fract_type)1 / 3;
 		matrix.b = 0;
 		matrix.c = 0;
-		matrix.d = (double)1 / 3;
-		matrix.e = (double)1 / 3;
+		matrix.d = (fract_type)1 / 3;
+		matrix.e = (fract_type)1 / 3;
 		matrix.f = 0;
 		if (mode == 3)
-			matrix.e = (double)2 / 3;
+			matrix.e = (fract_type)2 / 3;
 	}
 	else if (mode == 2)
 	{
-		matrix.a = (double)1 / 6;
+		matrix.a = (fract_type)1 / 6;
 		matrix.b = -sqrt(3) / 6;
 		matrix.c = sqrt(3) / 6;
-		matrix.d = (double)1 / 6;
-		matrix.e = (double)1 / 3;
+		matrix.d = (fract_type)1 / 6;
+		matrix.e = (fract_type)1 / 3;
 		matrix.f = 0;
 	}
 	else if (mode == 3)
 	{
-		matrix.a = (double)1 / 6;
+		matrix.a = (fract_type)1 / 6;
 		matrix.b = sqrt(3) / 6;
 		matrix.c = -sqrt(3) / 6;
-		matrix.d = (double)1 / 6;
-		matrix.e = (double)1 / 2;
+		matrix.d = (fract_type)1 / 6;
+		matrix.e = (fract_type)1 / 2;
 		matrix.f = sqrt(3) / 6;
 	}
 	return (matrix);
@@ -276,7 +271,7 @@ int	update_koch(t_fract *fract, int matrix_mode)
 	new_addr = mlx_get_data_addr(new_image, &fract->image_info.bpp, &fract->image_info.sl, &fract->image_info.endian);
 	offset.y = TRIANGLE_LENGTH / sqrt(3) * 0.5 - IMAGE_HEIGHT * 0.5;
 	offset.x = -IMAGE_WIDTH * 0.5;
-	matrix = get_matrix(matrix_mode);
+	matrix = get_matrix(matrix_mode , 0.5);
 	edge_area =  affine(fract, new_addr, offset, matrix);
 	clear_image(fract, fract->image_info.image);
 	offset.x = -edge_area.x_begin + TRIANGLE_OFFSET_X / 2;
@@ -308,7 +303,6 @@ void	zoom_koch(t_fract *fract)
 {
 	t_point offset;
 	t_area	edge_area;
-	/*
 	t_img	*new_image ;
 	void	*new_addr;
 	t_matrix	matrix;
@@ -317,11 +311,18 @@ void	zoom_koch(t_fract *fract)
 	if (!new_image)
 		close_fract(fract);
 	new_addr = mlx_get_data_addr(new_image, &fract->image_info.bpp, &fract->image_info.sl, &fract->image_info.endian);
+	edge_area =  affine(fract, new_addr, offset, matrix);
 	offset.x = -edge_area.x_begin + TRIANGLE_OFFSET_X;
 	offset.y = 0;
-	matrix = get_matrix(1);
+
+	matrix = get_matrix(0, fract->zoom_ratio);
 	edge_area =  affine(fract, new_addr, offset, matrix);
-	*/
+
+	clear_image(fract, fract->image_info.image);
+	offset.x = -edge_area.x_begin + TRIANGLE_OFFSET_X;
+	offset.y = 0;
+	overlapping_image(fract, new_image, offset);
+	/*
 	edge_area = fract->image_info.edge_area;
 	offset.x = -edge_area.x_begin + TRIANGLE_OFFSET_X;
 	offset.y = 0;
@@ -332,6 +333,7 @@ void	zoom_koch(t_fract *fract)
 	offset.x -= (edge_area.x_last - edge_area.x_begin);
 	offset.y += ((edge_area.y_last - edge_area.y_begin) * 2 + 1) ;
 	overlapping_image(fract, fract->image_info.backup_image, offset);
+	*/
 
 	//matrix = get_matrix(0);
 	////printf("zzom :%p\n",fract);

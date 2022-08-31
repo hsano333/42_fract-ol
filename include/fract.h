@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 03:01:01 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/30 19:00:15 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/30 21:16:10 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 #define ON_DESTROY 17
 
 #define INTERATION_INIT 100
-#define SPEED_THRESHOLD 5
+#define SPEED_THRESHOLD 4
 #define MOVING_VALUE	10
 
 #define DIVERSION_COUNT_UP_THORESHOLD 0.075
@@ -40,6 +40,7 @@ enum	e_fract{
 	INVALID,
 	MANDELBROT,
 	JULIA,
+	BURNING_SHIP,
 	KOCH,
 	GASKET,
 };
@@ -114,6 +115,7 @@ typedef struct s_fract {
 	int	local_endian;
 	int	defalut_color;
 	fract_type	base_size;
+	fract_type	zoom_ratio;
 	t_ipoint	step;
 	t_ipoint	c;
 	t_point		offset;

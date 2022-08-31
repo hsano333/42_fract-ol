@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 06:47:29 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/26 17:03:03 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/31 05:47:21 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static char	*check_invalid_word(const char *str, int *error)
 	{
 		if (str[i] == '.')
 			return ((char *)(&(str[i])));
-		else if (!ft_isdigit(str[i]))
+		else if (!(ft_isdigit(str[i]) || str[i] == '-' || str[i] == '+'))
 		{
 			*error = true;
 			return (NULL);
@@ -64,6 +64,7 @@ float	ft_atof(const char *str, int *error)
 	char	*dot_point;
 	float	result;
 	long	tmp_long;
+	double	minus_flag;
 
 	tmp_long = ft_atol(str, error);
 	if (*error == true)
@@ -71,11 +72,16 @@ float	ft_atof(const char *str, int *error)
 	dot_point = check_invalid_word(str, error);
 	if (dot_point == NULL)
 		return (float)tmp_long;
+	minus_flag = false;
+	if (tmp_long == 0 && (dot_point - str >= 2) && *(dot_point - 2) == '-')
+		minus_flag = true;
 	dot_point++;
 	len = get_digit_len(dot_point, 0);
 	if (len == 0)
 		return (float)tmp_long;
-	result = (float)(calc(len, dot_point) + tmp_long);
+	result = (float)(calc(len, dot_point) + (float)tmp_long);
+	if (minus_flag)
+		return (0 - result);
 	return (result);
 }
 
@@ -85,6 +91,7 @@ double	ft_atod(const char *str, int *error)
 	char	*dot_point;
 	double	result;
 	long	tmp_long;
+	double	minus_flag;
 
 	tmp_long = ft_atol(str, error);
 	if (*error == true)
@@ -92,11 +99,16 @@ double	ft_atod(const char *str, int *error)
 	dot_point = check_invalid_word(str, error);
 	if (dot_point == NULL)
 		return (float)tmp_long;
+	minus_flag = false;
+	if (tmp_long == 0 && (dot_point - str >= 2) && *(dot_point - 2) == '-')
+		minus_flag = true;
 	dot_point++;
 	len = get_digit_len(dot_point, 0);
 	if (len == 0)
 		return (double)tmp_long;
-	result = (double)(calc(len, dot_point) + tmp_long);
+	result = (double)(calc(len, dot_point) + (double)tmp_long);
+	if (minus_flag)
+		return (0 - result);
 	return (result);
 }
 //#include <stdio.h>
@@ -109,12 +121,15 @@ double	ft_atod(const char *str, int *error)
 //	//int len;
 //	//int	result;
 //	int	error;
+//	long	l_test = 10;
+//	double	d_test = 0.12345;
 //
 //	//result = 0;
 //	printf("LONGMAX=%ld\n",LONG_MAX);
 //	printf("LLONGMAX=%lld\n",LLONG_MAX);
 //	printf("ULLONGMAX=%lld\n",ULLONG_MAX);
 //	printf("INTMAX=%d\n",INT_MAX);
+//	printf("10 = :%.30lf, \n", (double)l_test + d_test);
 //	if (argc == 2)
 //	{
 //		s1 = argv[1];

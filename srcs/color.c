@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:50:26 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/27 06:15:11 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/30 21:24:25 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,3 @@ int	calc_color5(int n, int loop_max, int diverse_flag)
 		color = 0;
 	return (color);
 }
-

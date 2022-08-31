@@ -9,7 +9,7 @@ LIBFTNAME	:= libft.a
 LIBFT		:= $(LIBFTDIR)/$(LIBFTNAME)
 
 SRCDIR	:= ./srcs/
-SRC	:= init.c key.c mouse.c image.c julia.c mandelbrot.c gasket.c fract_common.c color.c image_common.c koch.c affine.c image_util.c
+SRC	:= init.c key.c mouse.c image.c julia.c mandelbrot.c gasket.c fract_common.c color.c color2.c image_common.c koch.c affine.c image_util.c zoom.c burning_ship.c
 ENTRY	:= main.c
 ENTRYBONUS	:= main_bonus.c
 ifdef WITH_BONUS
@@ -47,6 +47,8 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@$(CC) $(CFLAGS) $(IFLAGS) -c -o $@ $<
 
 %.a:
+	echo "Make libft"
+	echo $@
 	make -C $(dir $@)
 
 clean	:

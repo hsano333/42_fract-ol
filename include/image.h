@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 02:41:17 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/30 18:27:43 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/30 20:54:23 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	get_julia_image(t_fract *fract);
 int	get_mandelbrot_image(t_fract *fract);
 int	get_gasket_image(t_fract *fract);
 int	get_koch_image(t_fract *fract);
+int	get_burning_ship_image(t_fract *fract);
 //void	draw_julia(void *image, t_fract *fract);
 int	create_image(t_fract *fract);
 void	set_step(t_fract *fract);

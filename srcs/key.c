@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 09:11:31 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/26 20:39:07 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/30 21:33:11 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "ft_printf.h"
 #include "math.h"
 #include "color.h"
+#include "zoom.h"
 
 
 void	reset_image(t_fract *fract)
@@ -85,12 +86,15 @@ void	set_calc_method(t_fract *fract)
 	else if (fract->calc_color == (int (*)())calc_color4)
 		fract->calc_color = (int (*)())calc_color5;
 	else if (fract->calc_color == (int (*)())calc_color5)
+		fract->calc_color = (int (*)())calc_color6;
+	else if (fract->calc_color == (int (*)())calc_color6)
 		fract->calc_color = (int (*)())calc_color1;
 	fract->create_image_flag = true;
 	((t_fract*)fract)->lock = true;
 	fract->update_image_flag = true;
 
 }
+
 
 int	hook_key(int key,void *fract)
 {
@@ -107,6 +111,11 @@ int	hook_key(int key,void *fract)
 		reset_image(fract);
 	else if (key == U_KEY)
 		up_iteration_max(fract);
+	else if (key == I_KEY)
+		zoom_action(fract, 0, 0, ZOOM_IN);
+	else if (key == O_KEY)
+		zoom_action(fract, 0, 0, ZOOM_OUT);
+
 	else
 		ft_printf("other key :%d  %p\n",key, fract);
 	return (true);
