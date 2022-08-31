@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 02:55:18 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/31 06:56:20 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/31 07:00:39 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,8 @@ static int	set_fract(char **argv, t_fract *fract)
 		fract->fract_set = BURNING_SHIP;
 		fract->get_image = (int (*)())get_burning_ship_image;
 	}
-	else if (!ft_strncmp(argv[1], "koch", ft_strlen("koch")) 
-			|| !ft_strncmp(argv[1], "k", argv_size) || !ft_strncmp(argv[1], "4", argv_size))
-	{
-		fract->fract_set = KOCH;
-		fract->get_image = (int (*)())get_koch_image;
-	}
 	else if (!ft_strncmp(argv[1], "gasket", ft_strlen("gasket")) 
-			|| !ft_strncmp(argv[1], "g", argv_size) || !ft_strncmp(argv[1], "5", argv_size))
+			|| !ft_strncmp(argv[1], "g", argv_size) || !ft_strncmp(argv[1], "4", argv_size))
 	{
 		fract->fract_set = GASKET;
 		fract->get_image = (int (*)())get_gasket_image;
@@ -190,13 +184,8 @@ void	invalid_parameter(int argc, t_fract *fract)
 	ft_printf("\nsample11: fract m \n");
 	ft_printf("sample12: fract julia -0.12 0.74 \n");
 	ft_printf("sample13: fract b \n");
+	ft_printf("sample13: fract g \n");
 	exit(1);
-	ft_printf("exit?\n");
-	ft_printf("exit?\n");
-	ft_printf("exit?\n");
-	ft_printf("exit?\n");
-	ft_printf("exit?\n");
-
 }
 
 void	init(int argc, char** argv, t_fract *fract)

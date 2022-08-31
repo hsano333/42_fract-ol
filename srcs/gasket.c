@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   koch.c                                             :+:      :+:    :+:   */
+/*   gasket.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 17:31:41 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/30 20:37:45 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/31 06:59:55 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,7 +197,7 @@ static int	calc_color(t_fract *fract, int x, int y)
 */
 
 
-void	calc_koch(t_fract *fract, void *new_addr)
+void	calc_gasket(t_fract *fract, void *new_addr)
 {
 
 	//int	*src_i;
@@ -250,14 +250,14 @@ void	calc_koch(t_fract *fract, void *new_addr)
 
 	//old_i[0][0] = 0;
 	//src_i[0][0] = 0;
-	printf("end update koch \n");
-	printf("end update koch \n");
-	printf("end update koch \n");
-	printf("end update koch \n");
-	printf("end update koch \n");
+	printf("end update gasket \n");
+	printf("end update gasket \n");
+	printf("end update gasket \n");
+	printf("end update gasket \n");
+	printf("end update gasket \n");
 }
 
-int	update_koch(t_fract *fract, int matrix_mode)
+int	update_gasket(t_fract *fract, int matrix_mode)
 {
 	t_img	*new_image ;
 	void	*new_addr;
@@ -299,7 +299,7 @@ void	set_init(t_fract *fract)
 
 }
 
-void	zoom_koch(t_fract *fract)
+void	zoom_gasket(t_fract *fract)
 {
 	t_point offset;
 	t_area	edge_area;
@@ -339,11 +339,11 @@ void	zoom_koch(t_fract *fract)
 	////printf("zzom :%p\n",fract);
 	//new_addr = mlx_get_data_addr(fract->image_info.backup_image, &fract->image_info.bpp, &fract->image_info.sl, &fract->image_info.endian);
 	//edge_area =  affine(fract, new_addr, offset, matrix);
-	//update_koch(fract, 1);
+	//update_gasket(fract, 1);
 
 }
 
-int	get_koch_image(t_fract *fract)
+int	get_gasket_image(t_fract *fract)
 {
 	t_point point;
 
@@ -360,14 +360,14 @@ int	get_koch_image(t_fract *fract)
 		*/
 		update_display_area(fract, point, 1, point);
 		loop_xy(fract, draw_triangle);
-		update_koch(fract, 0);
-		update_koch(fract, 0);
-		update_koch(fract, 0);
-		update_koch(fract, 0);
-		update_koch(fract, 0);
-		update_koch(fract, 0);
-		update_koch(fract, 0);
-		update_koch(fract, 0);
+		update_gasket(fract, 0);
+		update_gasket(fract, 0);
+		update_gasket(fract, 0);
+		update_gasket(fract, 0);
+		update_gasket(fract, 0);
+		update_gasket(fract, 0);
+		update_gasket(fract, 0);
+		update_gasket(fract, 0);
 		fract->image_info.backup_image = copy_image(fract);
 		return (true);
 	}
@@ -375,36 +375,36 @@ int	get_koch_image(t_fract *fract)
 	//update_display_area(fract, point, 1, point);
 	/*
 	loop_xy(fract, draw_triangle);
-	update_koch(fract);
-	update_koch(fract);
-	update_koch(fract);
-	update_koch(fract);
-	update_koch(fract);
-	update_koch(fract);
+	update_gasket(fract);
+	update_gasket(fract);
+	update_gasket(fract);
+	update_gasket(fract);
+	update_gasket(fract);
+	update_gasket(fract);
 	*/
 		//loop_xy(fract, draw_triangle);
-		//update_koch(fract, 0);
-		//update_koch(fract, 0);
-		//update_koch(fract, 0);
-		//update_koch(fract, 0);
-		//update_koch(fract, 0);
-		//update_koch(fract, 0);
-		//update_koch(fract, 0);
-		//update_koch(fract, 0);
-		//update_koch(fract, 0);
+		//update_gasket(fract, 0);
+		//update_gasket(fract, 0);
+		//update_gasket(fract, 0);
+		//update_gasket(fract, 0);
+		//update_gasket(fract, 0);
+		//update_gasket(fract, 0);
+		//update_gasket(fract, 0);
+		//update_gasket(fract, 0);
+		//update_gasket(fract, 0);
 		//fract->image_info.backup_image = copy_image(fract);
 		/*
-	zoom_koch(fract);
-	zoom_koch(fract);
-	zoom_koch(fract);
-	zoom_koch(fract);
-	zoom_koch(fract);
-	zoom_koch(fract);
-	zoom_koch(fract);
-	zoom_koch(fract);
-	zoom_koch(fract);
+	zoom_gasket(fract);
+	zoom_gasket(fract);
+	zoom_gasket(fract);
+	zoom_gasket(fract);
+	zoom_gasket(fract);
+	zoom_gasket(fract);
+	zoom_gasket(fract);
+	zoom_gasket(fract);
+	zoom_gasket(fract);
 	*/
-	zoom_koch(fract);
+	zoom_gasket(fract);
 	return (0);
-	//return (update_koch(fract));
+	//return (update_gasket(fract));
 }
