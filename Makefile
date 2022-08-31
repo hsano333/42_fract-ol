@@ -35,7 +35,10 @@ CC	:= cc
 CFLAGS	:= -Wall -Wextra -Werror -fsanitize=address
 LDFLAGS := $(IFLAGS) $(LFLAGS) -lft -lmlx -lX11 -lXext -lm
 
-all:	$(NAME)	
+all:	
+	@make -C $(LIBFTDIR)
+	@make -C $(LIBMLXDIR)
+	@make $(NAME)	
 
 $(NAME)	:	$(OBJECTS) $(LIBS) 
 		$(CC) $(CFLAGS) $(OBJECTS) $(LDFLAGS) -o $@
@@ -43,13 +46,8 @@ $(NAME)	:	$(OBJECTS) $(LIBS)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p $(OBJDIR) / $(*D)
-	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -MMD -MP -MF $(OBJDIR)/$*.d  -o $@
-	@$(CC) $(CFLAGS) $(IFLAGS) -c -o $@ $<
-
-%.a:
-	echo "Make libft"
-	echo $@
-	make -C $(dir $@)
+	$(CC) $(CFLAGS) $(IFLAGS) -c $< -MMD -MP -MF $(OBJDIR)/$*.d  -o $@
+	$(CC) $(CFLAGS) $(IFLAGS) -c -o $@ $<
 
 clean	:
 			$(RM) $(OBJECTS)
