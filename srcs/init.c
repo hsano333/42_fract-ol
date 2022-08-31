@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 02:55:18 by hsano             #+#    #+#             */
-/*   Updated: 2022/09/01 01:01:17 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/31 19:24:26 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "mlx_int.h"
 #include "libft_isto.h"
 #include "libft_str.h"
-#include "libft_mem.h"
 #include "libft_mem.h"
 #include "image.h"
 #include "color.h"

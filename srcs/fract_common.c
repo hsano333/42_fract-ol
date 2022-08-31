@@ -6,12 +6,13 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 05:38:17 by hsano             #+#    #+#             */
-/*   Updated: 2022/09/01 00:17:09 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/31 19:22:02 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fract.h"
 #include "image.h"
+#include <float.h>
 
 int	unlock(t_fract *fract)
 {

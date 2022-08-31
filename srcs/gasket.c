@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 17:31:41 by hsano             #+#    #+#             */
-/*   Updated: 2022/09/01 01:37:49 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/31 19:19:53 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	draw_triangle(t_fract *fract, t_point point)
 	return (0);
 }
 
-static t_img	*create_tmp_image(t_fract fract, t_area *edge_area)
+static t_img	*create_tmp_image(t_fract *fract, t_area *edge_area)
 {
 	void		*new_addr;
 	t_img		*new_image;
@@ -72,7 +72,6 @@ int	update_gasket(t_fract *fract)
 	t_img		*new_image;
 	t_area		edge_area;
 	t_point		offset;
-	t_matrix	matrix;
 
 	new_image = create_tmp_image(fract, &edge_area);
 	clear_image(fract, fract->image_info.image);

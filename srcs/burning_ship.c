@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 20:46:56 by hsano             #+#    #+#             */
-/*   Updated: 2022/09/01 02:07:34 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/31 19:22:36 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ static int	calc(t_fract *fract, t_ipoint c, int *diverse_flag, int *tmp_flag)
 		z.r = tmp_r;
 		sum = z.i * z.i + z.r + z.r;
 		if (sum > fract->speed_thoreshold * 0.7)
-			tmp_flag = true;
+			*tmp_flag = true;
 		if (sum > fract->speed_thoreshold)
 		{
 			fract->diversion_count++;
-			diverse_flag = true;
+			*diverse_flag = true;
 			break ;
 		}
 		n++;

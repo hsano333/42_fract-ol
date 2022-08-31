@@ -6,11 +6,15 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 00:58:38 by hsano             #+#    #+#             */
-/*   Updated: 2022/09/01 01:00:08 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/31 19:25:00 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "arg.h"
+#include "image.h"
+#include "libft_str.h"
+#include "libft_mem.h"
+#include "libft_isto.h"
 
 int	set_fract(char **argv, t_fract *fract)
 {
