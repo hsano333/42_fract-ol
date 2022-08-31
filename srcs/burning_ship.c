@@ -6,43 +6,35 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 20:46:56 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/31 12:28:58 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/01 02:07:34 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "fract.h"
 #include "color.h"
 #include "image.h"
 
-int	get_burning_ship_color(t_fract *fract, t_point w_point)
+static t_fract_type	tmp_abs(t_fract_type a)
 {
-	int color;
-	t_ipoint	z;
-	int	n;
-	fract_type	tmp_r;
-	fract_type	sum;
-	t_ipoint c;
-	int	tmp_flag;
-	int	diverse_flag;
+	if (a >= 0)
+		return (a);
+	return (0 - a);
+}
 
-	c.r = fract->i_area.r_begin + fract->step.r * w_point.x;
-	c.i = fract->i_area.i_begin + fract->step.i * w_point.y;
+static int	calc(t_fract *fract, t_ipoint c, int *diverse_flag, int *tmp_flag)
+{
+	int				n;
+	t_ipoint		z;
+	t_fract_type	tmp_r;
+	t_fract_type	sum;
+
 	z.r = 0;
 	z.i = 0;
-	tmp_flag = false;
-
 	n = 0;
-	color = 0;
-	diverse_flag = false;
 	while (n < fract->iteration_max)
 	{
 		tmp_r = z.r * z.r - z.i * z.i + c.r;
-		z.i = (2 * z.r * z.i); // + c.i;
-		if (z.i < 0)
-			z.i = c.i - z.i;
-		else
-			z.i = c.i + z.i;
+		z.i = tmp_abs(2 * z.r * z.i) + z.i;
 		z.r = tmp_r;
 		sum = z.i * z.i + z.r + z.r;
 		if (sum > fract->speed_thoreshold * 0.7)
@@ -51,13 +43,30 @@ int	get_burning_ship_color(t_fract *fract, t_point w_point)
 		{
 			fract->diversion_count++;
 			diverse_flag = true;
-			break;
+			break ;
 		}
 		n++;
 	}
-	color = fract->calc_color(n, fract->iteration_max, diverse_flag);
+	return (n);
+}
+
+int	get_burning_ship_color(t_fract *fract, t_point w_point)
+{
+	int			color;
+	int			n;
+	int			tmp_flag;
+	int			diverse_flag;
+	t_ipoint	c;
+
+	c.r = fract->i_area.r_begin + fract->step.r * w_point.x;
+	c.i = fract->i_area.i_begin + fract->step.i * w_point.y;
+	tmp_flag = false;
+	n = 0;
+	diverse_flag = false;
+	n = calc(fract, c, &diverse_flag, &tmp_flag);
 	if (tmp_flag && diverse_flag == false)
 		fract->near_diversion_count++;
+	color = fract->calc_color(n, fract->iteration_max, diverse_flag);
 	return (color);
 }
 

@@ -6,21 +6,23 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 17:46:03 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/30 20:26:26 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/01 02:11:20 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fract.h"
+#ifndef AFFINE_H
+# define AFFINE_H
+# include "fract.h"
 
 typedef struct s_matrix {
-	fract_type	a;
-	fract_type	b;
-	fract_type	c;
-	fract_type	d;
-	fract_type	e;
-	fract_type	f;
+	t_fract_type	a;
+	t_fract_type	b;
+	t_fract_type	c;
+	t_fract_type	d;
+	t_fract_type	e;
+	t_fract_type	f;
 }	t_matrix;
 
-//void	affine(t_fract *fract, void *dest_addr, t_matrix matrix);
-//void	affine(t_fract *fract, void *dest_addr, t_point offset,  t_matrix matrix);
-t_area	affine(t_fract *fract, void *dest_addr, t_point offset,  t_matrix matrix);
+t_area	affine(t_fract *fract, void *dest_addr \
+		, t_point offset, t_matrix matrix);
+#endif

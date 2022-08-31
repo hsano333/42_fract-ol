@@ -6,14 +6,18 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 15:54:34 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/21 18:35:47 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/01 01:54:43 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-enum	e_click{
+#ifndef MOUSE_H
+# define MOUSE_H
+
+enum e_click {
 	LEFT = 1,
 	WHEEL,
 	RIGHT,
 	SCROLL_UP,
 	SCROLL_DOWN,
 };
+#endif

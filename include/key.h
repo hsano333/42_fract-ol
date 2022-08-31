@@ -6,9 +6,12 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:40:27 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/30 19:51:15 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/01 01:56:10 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef KEY_H
+# define KEY_H
 
 enum e_key {
 	ARROW_LEFT = 65361,
@@ -33,3 +36,4 @@ enum e_key {
 	T_KEY = 116,
 	U_KEY = 117,
 };
+#endif

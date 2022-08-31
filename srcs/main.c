@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 02:54:57 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/25 18:13:49 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/01 00:53:35 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,7 @@
 #include "ft_printf.h"
 #include "image.h"
 
-#define	IM1_SX		242
-#define	IM1_SY		242
-int	bpp1;
-int	sl1;
-int	endian1;
-char	*data1;
-
-
-int main(int argc, char** argv)
+int	main(int argc, char **argv)
 {
 	t_fract	fract;
 
