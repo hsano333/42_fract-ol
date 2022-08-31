@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 09:14:25 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/30 18:26:48 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/31 09:08:44 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ void	clear_image(t_fract *fract, t_img *image)
 	int	bpp;
 
 	addr = mlx_get_data_addr(image, &bpp, &sl, &fract->image_info.endian);
-	printf(" test No.3 over new_adr=%p\n",addr);
 	point.y = fract->w_height;
 	while (point.y--)
 	{

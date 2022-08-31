@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 03:01:01 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/30 21:16:10 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/31 12:13:50 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ enum	s_error{
 	MLX_WINDOW_ERROR,
 };
 
-typedef double long fract_type;
+//typedef double long fract_type;
+typedef double fract_type;
 
 typedef struct s_point {
 	int	x;
@@ -81,7 +82,6 @@ typedef struct s_iarea {
 
 typedef struct s_image {
 	void	*image;
-	void	*backup_image;
 	void	*addr;
 	int	endian;
 	int	bpp;
@@ -95,7 +95,6 @@ typedef struct s_fract {
 	void	*window;
 	void	*mlx;
 	t_image	image_info;
-	void	*image_backup;
 	t_iarea	i_area;
 	t_iarea	i_area_base;
 	int	w_width;
@@ -107,14 +106,13 @@ typedef struct s_fract {
 	int	near_diversion_count;
 	int	(*get_image)(void *);
 	int	(*calc_color)(int, int , int);
+	void	(*init)(void *);
 	long	zoom_count;
-	int	tmp;
 	int	lock;
 	int	update_image_flag;
 	int	create_image_flag;
 	int	local_endian;
 	int	defalut_color;
-	fract_type	base_size;
 	fract_type	zoom_ratio;
 	t_ipoint	step;
 	t_ipoint	c;

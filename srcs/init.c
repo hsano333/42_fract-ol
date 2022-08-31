@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 02:55:18 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/31 07:00:39 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/31 09:03:21 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,28 +33,16 @@ static int	set_fract(char **argv, t_fract *fract)
 	fract->fract_set = INVALID;
 	if (!ft_strncmp(argv[1], "mandelbrot", ft_strlen("mandelbrot")) 
 			|| !ft_strncmp(argv[1], "m", argv_size) || !ft_strncmp(argv[1], "1", argv_size))
-	{
-		fract->fract_set = MANDELBROT;
-		fract->get_image = (int (*)())get_mandelbrot_image;
-	}
+		fract->init = (void *)init_mandelbrot;
 	else if (!ft_strncmp(argv[1], "julia", ft_strlen("julia")) 
 			|| !ft_strncmp(argv[1], "j", argv_size) || !ft_strncmp(argv[1], "2", argv_size))
-	{
-		fract->fract_set = JULIA;
-		fract->get_image = (int (*)())get_julia_image;
-	}
+		fract->init = (void *)init_julia;
 	else if (!ft_strncmp(argv[1], "burning_ship", ft_strlen("burning_ship")) 
 			|| !ft_strncmp(argv[1], "b", argv_size) || !ft_strncmp(argv[1], "3", argv_size))
-	{
-		fract->fract_set = BURNING_SHIP;
-		fract->get_image = (int (*)())get_burning_ship_image;
-	}
+		fract->init = (void *)init_burning_ship;
 	else if (!ft_strncmp(argv[1], "gasket", ft_strlen("gasket")) 
 			|| !ft_strncmp(argv[1], "g", argv_size) || !ft_strncmp(argv[1], "4", argv_size))
-	{
-		fract->fract_set = GASKET;
-		fract->get_image = (int (*)())get_gasket_image;
-	}
+		fract->init = (void *)init_gasket;
 	else
 		return (false);
 	return (true);
@@ -69,13 +57,11 @@ static int	set_option(int argc, char **argv, t_fract *fract)
 	fract->c.r = (long double)ft_atod(argv[2], &error);
 	if (error == true || fract->c.r > 2 || fract->c.r < -2)
 		return (false);
-		//fract->error = ARGV_ERROR;
 	if (argc == 3)
 		return (true);
 	fract->c.i = (long double)ft_atod(argv[3], &error);
 	if (error == true || fract->c.i > 2 || fract->c.i < -2)
 		return (false);
-		//fract->error = ARGV_ERROR;
 	return (true);
 }
 int	expose_win(void *p)
@@ -105,6 +91,12 @@ static int	init_mlx(t_fract *fract)
 		return (false);
 	}
 	fract->image_info.image = mlx_new_image(fract->mlx, IMAGE_WIDTH, IMAGE_HEIGHT);
+	if (!fract->image_info.image)
+	{
+		fract->error = MEMORY_ERROR;
+		close_fract(fract);
+	}
+	/*
 	fract->image_backup = mlx_new_image(fract->mlx, IMAGE_WIDTH, IMAGE_HEIGHT);
 	if (!fract->image_info.image || !fract->image_backup)
 	{
@@ -114,6 +106,7 @@ static int	init_mlx(t_fract *fract)
 		//ft_printf("can't allocat memory\n");
 		//exit(1);
 	}
+	*/
 	mlx_expose_hook(fract->window, expose_win, fract);
 	ft_printf("befrore mlx_mouse_hook \n");
 	mlx_mouse_hook(fract->window, hook_mouse, fract);
@@ -132,35 +125,16 @@ void	set_init_value(t_fract * fract)
 {
 	int	a = 0x11223344;
 
+	fract->init(fract);
 	fract->error = NO_ERROR;
 	fract->speed_thoreshold = SPEED_THRESHOLD;
 	fract->w_width = IMAGE_WIDTH;
 	fract->w_height = IMAGE_HEIGHT;
-	fract->calc_color = (int (*)())calc_color1;
-	if (fract->fract_set == BURNING_SHIP)
-	{
-		fract->i_area.r_begin = -1.2;
-		fract->i_area.r_last = 1.2;
-		fract->i_area.i_begin = -1;
-		fract->i_area.i_last = 1;
-		fract->iteration_max = INTERATION_INIT;
-		fract->calc_color = (int (*)())calc_color6;
-	}
-	else
-	{
-		fract->i_area.r_begin = R_START;
-		fract->i_area.r_last = R_END;
-		fract->i_area.i_begin = I_START;
-		fract->i_area.i_last = I_END;
-		fract->iteration_max = INTERATION_INIT;
-	}
 	fract->i_area_base = fract->i_area;
 	fract->c.r = -0.12;
 	fract->c.i = 0.74;
 	fract->offset.x = (W_WIDTH - IMAGE_WIDTH) / 4;
 	fract->offset.y = (W_HEIGHT - IMAGE_HEIGHT) / 4;
-	fract->offset.y = (W_HEIGHT - IMAGE_HEIGHT) / 4;
-	fract->defalut_color = ((255 << 16) + (255 << 8) + 255);
 	set_step(fract);
 	fract->local_endian = 0;
 	if (((unsigned char *)&a)[0] == 0x11)

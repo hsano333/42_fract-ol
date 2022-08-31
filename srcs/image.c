@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 01:31:35 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/28 17:39:44 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/31 09:23:04 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ void	loop_xy(t_fract *fract, int (*get_color)(t_fract *, t_point))
 	point.y = fract->w_height;
 	while (point.y--)
 	{
-		ptr = fract->image_info.addr + fract->image_info.sl * (fract->w_height - point.y - 1);
+		//ptr = fract->image_info.addr + fract->image_info.sl * (fract->w_height - point.y - 1);
+		ptr = fract->image_info.addr + fract->image_info.sl * (point.y);
 		point.x = fract->w_width;
 		while (point.x--)
 		{
@@ -92,7 +93,7 @@ int	create_image(t_fract *fract)
 		fract->iteration_max -= (fract->iteration_max - INTERATION_INIT)/fract->zoom_count ;
 	}
 
-	printf("bpp1=%d, sl1=%d, endian1=%d,fract->diversion_count=%d,fract->near_diversion_count=%d ,tmp_ratio=%lf\n",fract->image_info.bpp, fract->image_info.sl, fract->image_info.endian,fract->diversion_count, fract->near_diversion_count,tmp_ratio);
+	//printf("bpp1=%d, sl1=%d, endian1=%d,fract->diversion_count=%d,fract->near_diversion_count=%d ,tmp_ratio=%lf\n",fract->image_info.bpp, fract->image_info.sl, fract->image_info.endian,fract->diversion_count, fract->near_diversion_count,tmp_ratio);
 	//if (diversion_count > )
 	//mlx_put_image_to_window(fract->mlx, fract->window, fract->image_info.image, 80, 80);
 	//mlx_string_put(fract->mlx, fract->window, fract->w_width * 0.5 , fract->w_height * 0.5, 0xffffffff, "Calculating2"   );
@@ -103,13 +104,10 @@ int	create_image(t_fract *fract)
 
 int	update_image(t_fract *fract)
 {
-	//printf("loop update image No.1\n");
 	if (!fract->update_image_flag)
 		return (false);
-	//printf("loop update image No.2\n");
 	if (fract->create_image_flag)
 		create_image(fract);
-	printf("update image offset:x=%d, y=%d\n", fract->offset.x, fract->offset.y);
 	mlx_put_image_to_window(fract->mlx, fract->window, fract->image_info.image, fract->offset.x, fract->offset.y);
 	fract->update_image_flag = false;
 	fract->create_image_flag = false;

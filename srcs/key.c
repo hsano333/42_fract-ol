@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 09:11:31 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/30 21:33:11 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/31 09:08:51 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ void	update_offset(int key, t_fract *fract)
 	//int abs_x;
 	//int abs_y;
 	if (key == ARROW_LEFT)
-		fract->offset.x -= MOVING_VALUE;
-	else if (key == ARROW_UP)
-		fract->offset.y -= MOVING_VALUE;
-	else if (key == ARROW_RIGHT)
 		fract->offset.x += MOVING_VALUE;
-	else if (key == ARROW_DOWN)
+	else if (key == ARROW_UP)
 		fract->offset.y += MOVING_VALUE;
+	else if (key == ARROW_RIGHT)
+		fract->offset.x -= MOVING_VALUE;
+	else if (key == ARROW_DOWN)
+		fract->offset.y -= MOVING_VALUE;
 
 	//abs_x = abs(fract->offset.x) * 2;
 	//abs_y = abs(fract->offset.y) * 2;
@@ -63,14 +63,12 @@ void	update_offset(int key, t_fract *fract)
 		fract->offset.x -= (W_WIDTH - IMAGE_WIDTH) / 4;
 		fract->offset.y = (W_HEIGHT - IMAGE_HEIGHT) / 4 - fract->offset.y;
 		//fract->offset.y =  fract->w_height -  fract->offset.y;
-		printf("moving No.1  over reset x=%d, y=%d, offset x=%d, y=%d",point.x, point.y,fract->offset.x, fract->offset.y);
 		update_display_area(fract, point, 1, fract->offset);
 
 		fract->offset.x = (W_WIDTH - IMAGE_WIDTH) / 4;
 		fract->offset.y = (W_HEIGHT - IMAGE_HEIGHT) / 4;
 		fract->create_image_flag = true;
 	}
-	printf("not moving No.2 over reset x=%d, y=%d, offset x=%d, y=%d",point.x, point.y,fract->offset.x, fract->offset.y);
 	((t_fract*)fract)->lock = true;
 	fract->update_image_flag = true;
 }
@@ -88,6 +86,8 @@ void	set_calc_method(t_fract *fract)
 	else if (fract->calc_color == (int (*)())calc_color5)
 		fract->calc_color = (int (*)())calc_color6;
 	else if (fract->calc_color == (int (*)())calc_color6)
+		fract->calc_color = (int (*)())calc_color7;
+	else if (fract->calc_color == (int (*)())calc_color7)
 		fract->calc_color = (int (*)())calc_color1;
 	fract->create_image_flag = true;
 	((t_fract*)fract)->lock = true;

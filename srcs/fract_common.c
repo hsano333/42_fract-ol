@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 05:38:17 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/29 19:22:09 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/31 09:05:05 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int	close_fract(t_fract *fract)
 		//mlx_destroy_image(fract->mlx, image);
 	if (fract->image_info.image)
 		mlx_destroy_image(fract->mlx, fract->image_info.image);
-	if (fract->image_backup)
-		mlx_destroy_image(fract->mlx, fract->image_backup);
+	//if (fract->image_backup)
+		//mlx_destroy_image(fract->mlx, fract->image_backup);
 	mlx_destroy_window(fract->mlx, fract->window);
 	exit(0);
 
@@ -40,7 +40,7 @@ void	set_step(t_fract *fract)
 		fract->step.r = (fract->i_area.r_last - fract->i_area.r_begin) / fract->w_width;
 	if (fract->w_height != 0)
 		fract->step.i = (fract->i_area.i_last - fract->i_area.i_begin) / fract->w_height;
-	fract->base_size = (fract->i_area.i_last - fract->i_area.i_begin) * 0.75;
+	//fract->base_size = (fract->i_area.i_last - fract->i_area.i_begin) * 0.75;
 
 }
 
