@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 00:58:38 by hsano             #+#    #+#             */
-/*   Updated: 2022/09/01 07:54:20 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/01 13:05:57 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	set_fract(char **argv, t_fract *fract)
 
 	str = argv[1];
 	i = -1;
-	len = ft_printf(str);
+	len = ft_strlen(str);
 	while (str[i++])
 		str[i] = ft_tolower(str[i]);
 	fract->fract_set = INVALID;

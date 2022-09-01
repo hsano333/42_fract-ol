@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 09:11:31 by hsano             #+#    #+#             */
-/*   Updated: 2022/09/01 07:48:40 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/01 13:36:38 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	update_over_offset(t_fract *fract)
 	t_point	point;
 
 	mlx_string_put(fract->mlx, fract->window, IMAGE_WIDTH * 0.5, \
-				IMAGE_HEIGHT * 0.5, 0xffffffff, "Calculating");
+				IMAGE_HEIGHT * 0.5, fract->defalut_color, "Calculating");
 	point.x = W_WIDTH / 2;
 	point.y = W_HEIGHT / 2;
 	fract->offset.x -= (W_WIDTH - IMAGE_WIDTH) / 4;
@@ -83,6 +83,10 @@ void	set_calc_method(t_fract *fract)
 	fract->create_image_flag = true;
 	((t_fract *)fract)->lock = true;
 	fract->update_image_flag = true;
+	fract->defalut_color = ((255 << 16) + (255 << 8) + 255);
+	if (fract->calc_color == (int (*)())calc_color2
+			|| fract->calc_color == (int (*)())calc_color3)
+		fract->defalut_color = ((255 << 16) + (0 << 8) + 0);
 }
 
 int	hook_key(int key, void *fract)
