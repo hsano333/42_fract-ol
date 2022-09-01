@@ -23,7 +23,6 @@ OBJS	:= $(SRCS:.c=.o)
 OBJDIR	:= ./obj
 OBJECTS	:= $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
 DEPS	:= $(OBJECTS:.o=.d)
-INCS	:= ./include $(LIBFTDIR)/include $(LIBMLXDIR)
 ifeq ($(shell uname),Darwin)
 INCS	:= ./include $(LIBFTDIR)/include $(LIBMLXDIR) /opt/X11/include
 else
