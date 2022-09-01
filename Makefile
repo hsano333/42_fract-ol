@@ -35,7 +35,7 @@ LFLAGS	:= $(addprefix -L,$(LIBDIRS))
 LIBS	:= $(LIBFT) $(LIBMLX)
 
 CC	:= cc
-CFLAGS	:= -Wall -Wextra -Werror -fsanitize=address
+CFLAGS	:= -Wall -Wextra -Werror
 ifeq ($(shell uname),Darwin)
 LDFLAGS := $(IFLAGS) -L$(LIBFTDIR) -lft -lm -L/usr/X11R6/lib -lmlx -lXext -framework OpenGL -framework AppKit
 else
