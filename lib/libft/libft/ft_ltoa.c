@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 20:03:06 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/25 20:51:42 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/01 20:43:35 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static size_t	get_count(char *p, long n)
 {
 	long long	a;
-	size_t	i;	
-	size_t	cnt;
+	size_t		i;	
+	size_t		cnt;
 
 	i = 0;
 	cnt = 0;

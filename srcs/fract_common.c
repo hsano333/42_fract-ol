@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 05:38:17 by hsano             #+#    #+#             */
-/*   Updated: 2022/09/01 07:54:35 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/01 20:39:36 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,3 @@ void	set_step(t_fract *fract)
 		fract->step.i = (fract->i_area.i_last - fract->i_area.i_begin) \
 			/ fract->w_height;
 }
-

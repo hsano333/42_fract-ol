@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 06:47:29 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/31 05:47:21 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/01 21:15:51 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "libft_common.h"
 #define NUMBER_LONG  1000000000000000000
 
-static double	calc(long len, char* dot_point)
+static double	calc(long len, char *dot_point)
 {
 	double	tmp_double;
 	size_t	power;
@@ -33,7 +33,8 @@ static double	calc(long len, char* dot_point)
 	tmp_power = NUMBER_LONG / 10;
 	while (len > 0 && len--)
 	{
-		tmp_double += (double)((double)(*(dot_point++) - '0') * (double)tmp_power / (double)power);
+		tmp_double += ((double)(*(dot_point++) - '0')) \
+			* ((double)(tmp_power / (double)power));
 		tmp_power /= 10;
 	}
 	return ((double)(tmp + tmp_double) / (double)NUMBER_LONG);
@@ -58,58 +59,37 @@ static char	*check_invalid_word(const char *str, int *error)
 	return (NULL);
 }
 
-float	ft_atof(const char *str, int *error)
-{
-	long	len;
-	char	*dot_point;
-	float	result;
-	long	tmp_long;
-	double	minus_flag;
-
-	tmp_long = ft_atol(str, error);
-	if (*error == true)
-		return (0.0);
-	dot_point = check_invalid_word(str, error);
-	if (dot_point == NULL)
-		return (float)tmp_long;
-	minus_flag = false;
-	if (tmp_long == 0 && (dot_point - str >= 2) && *(dot_point - 2) == '-')
-		minus_flag = true;
-	dot_point++;
-	len = get_digit_len(dot_point, 0);
-	if (len == 0)
-		return (float)tmp_long;
-	result = (float)(calc(len, dot_point) + (float)tmp_long);
-	if (minus_flag)
-		return (0 - result);
-	return (result);
-}
-
 double	ft_atod(const char *str, int *error)
 {
 	long	len;
 	char	*dot_point;
 	double	result;
-	long	tmp_long;
-	double	minus_flag;
+	long	tmp;
+	int		minus_flag;
 
-	tmp_long = ft_atol(str, error);
+	tmp = ft_atol(str, error);
 	if (*error == true)
 		return (0.0);
 	dot_point = check_invalid_word(str, error);
 	if (dot_point == NULL)
-		return (float)tmp_long;
+		return ((float)tmp);
 	minus_flag = false;
-	if (tmp_long == 0 && (dot_point - str >= 2) && *(dot_point - 2) == '-')
+	if (tmp < 0 || (tmp == 0 && (dot_point - str >= 2) \
+				&& *(dot_point - 2) == '-'))
 		minus_flag = true;
 	dot_point++;
 	len = get_digit_len(dot_point, 0);
 	if (len == 0)
-		return (double)tmp_long;
-	result = (double)(calc(len, dot_point) + (double)tmp_long);
+		return ((double)tmp);
+	result = (double)(calc(len, dot_point));
 	if (minus_flag)
-		return (0 - result);
-	return (result);
+		return (0 - result + (double)tmp);
+	return (result + (double)tmp);
+}
+
+float	ft_atof(const char *str, int *error)
+{
+	return ((float)ft_atod(str, error));
 }
 //#include <stdio.h>
 //#include <string.h>

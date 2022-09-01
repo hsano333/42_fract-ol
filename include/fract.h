@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 03:01:01 by hsano             #+#    #+#             */
-/*   Updated: 2022/09/01 07:06:11 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/01 20:42:24 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,14 +110,14 @@ typedef struct s_fract {
 	t_fract_type	zoom_ratio;
 }	t_fract;
 
-int		hook_key(int key, void *p);
-int		hook_mouse(int key, int x, int y, void*toto);
-int		detect_move(int x, int y, void *p);
-int		close_fract(t_fract *fract);
+int			hook_key(int key, void *p);
+int			hook_mouse(int key, int x, int y, void*toto);
+int			detect_move(int x, int y, void *p);
+int			close_fract(t_fract *fract);
 void		init(int argc, char **argv, t_fract *fract);
 void		set_step(t_fract *fract);
 void		update_display_area(t_fract *fract, t_point point \
-		, float zoom_ratio, t_point offset);
+				, float zoom_ratio, t_point offset);
 void		set_init_value(t_fract *fract);
 t_ipoint	transform_ri(t_fract *fract, int x, int y);
 

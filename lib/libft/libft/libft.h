@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 21:40:57 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/26 14:32:59 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/01 20:43:06 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ int		ft_tolower(int c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 int		ft_atoi(const char *str, int *long_over_flag);
-long		ft_atol(const char *str, int *long_over_flag);
-float		ft_atof(const char *str, int *error);
-float		ft_atof(const char *str, int *error);
-double		ft_atod(const char *str, int *error);
+long	ft_atol(const char *str, int *long_over_flag);
+float	ft_atof(const char *str, int *error);
+float	ft_atof(const char *str, int *error);
+double	ft_atod(const char *str, int *error);
 int		ft_lstsize(t_list *lst);
 char	*ft_strdup(const char *s1);
 char	*ft_strchr(const char *s, int c);
