@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 09:11:31 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/31 20:09:34 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/01 07:48:40 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,8 @@ int	hook_key(int key, void *fract)
 	else if (key == U_KEY)
 		(((t_fract *)fract)->iteration_max)++;
 	else if (key == I_KEY)
-		zoom_action(fract, 0, 0, ZOOM_IN);
+		zoom_action(fract, IMAGE_WIDTH / 2, IMAGE_HEIGHT / 2, ZOOM_IN);
 	else if (key == O_KEY)
-		zoom_action(fract, 0, 0, ZOOM_OUT);
-	else
-		ft_printf("other key :%d  %p\n", key, fract);
+		zoom_action(fract, IMAGE_WIDTH / 2, IMAGE_HEIGHT / 2, ZOOM_OUT);
 	return (true);
 }

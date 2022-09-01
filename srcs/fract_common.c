@@ -6,21 +6,28 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 05:38:17 by hsano             #+#    #+#             */
-/*   Updated: 2022/09/01 07:04:49 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/01 07:54:35 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fract.h"
 #include "image.h"
 #include <float.h>
+#include <errno.h>
 
 int	close_fract(t_fract *fract)
 {
 	if (fract->image_info.image)
 		mlx_destroy_image(fract->mlx, fract->image_info.image);
-	mlx_destroy_window(fract->mlx, fract->window);
+	if (fract->window)
+		mlx_destroy_window(fract->mlx, fract->window);
+	if (fract->error == MEMORY_ERROR)
+	{
+		errno = 12;
+		perror(NULL);
+		exit(EXIT_FAILURE);
+	}
 	exit(0);
-	return (0);
 }
 
 void	check_overflow(t_fract *fract, t_iarea tmp_area)

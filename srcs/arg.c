@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 00:58:38 by hsano             #+#    #+#             */
-/*   Updated: 2022/09/01 06:46:25 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/01 07:54:20 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "libft_str.h"
 #include "libft_mem.h"
 #include "libft_isto.h"
+#include <errno.h>
 
 int	set_fract(char **argv, t_fract *fract)
 {
@@ -47,10 +48,11 @@ int	set_fract(char **argv, t_fract *fract)
 
 void	invalid_parameter(int argc, t_fract *fract)
 {
-	if (argc <= 2)
-		ft_printf("\nparameters are missing\n");
+	errno = 22;
+	if (argc < 2)
+		ft_printf("\n%s:%s\n", strerror(errno), "parameters are missing\n");
 	else if (fract->fract_set == INVALID)
-		ft_printf("First parameter is invalid\n");
+		ft_printf("\n%s:%s\n", strerror(errno), "First parameter is invalid\n\n");
 	ft_printf("usage: fract fract_set [init_r] [init_i]\n");
 	ft_printf("fract_set:\n");
 	ft_printf(" 	\"m\" , \"1\" , \"mandelbrot\"		: display Mandelbrot set\n");
