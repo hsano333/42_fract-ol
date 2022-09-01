@@ -1,4 +1,4 @@
-CC		= gcc
+CC		= cc
 CFLAGS	= -Wall -Wextra -Werror -I ${HEAD}
 NAME 	= libft.a
 PRE		= ./
@@ -25,7 +25,7 @@ clean	:
 fclean	:	clean
 			@${RM} ${NAME}
 
-re		:	@fclean all
+re		:	fclean all
 
 bonus	:	
 			@make WITH_BONUS=1
