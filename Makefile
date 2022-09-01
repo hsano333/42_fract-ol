@@ -35,12 +35,10 @@ IFLAGS	:= $(addprefix -I,$(INCS))
 LFLAGS	:= $(addprefix -L,$(LIBDIRS))
 LIBS	:= $(LIBFT) $(LIBMLX)
 
-
-
 CC	:= cc
 CFLAGS	:= -Wall -Wextra -Werror -fsanitize=address
 ifeq ($(shell uname),Darwin)
-LDFLAGS := $(IFLAGS) $(LFLAGS) -lft -lm -L/usr/X11R6/lib -lmlx -lXext -framework OpenGL -framework AppKit
+LDFLAGS := $(IFLAGS) -L$(LIBFTDIR) -lft -lm -L/usr/X11R6/lib -lmlx -lXext -framework OpenGL -framework AppKit
 else
 LDFLAGS := $(IFLAGS) $(LFLAGS) -lft -lm -lmlx -lX11 -lXext
 endif
