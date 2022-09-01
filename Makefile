@@ -2,6 +2,7 @@ NAME 	:= fractol
 LIB	:= ./lib/
 
 LIBMLXDIR	:= $(LIB)/minilibx-linux
+LIBMLXTAR	:= $(LIB)/minilibx-linux.tgz
 LIBMLX		:= $(LIBMLXDIR)/libmlx.a
 
 LIBFTDIR	:= $(LIB)/libft
@@ -35,7 +36,7 @@ CC	:= cc
 CFLAGS	:= -Wall -Wextra -Werror -fsanitize=address
 LDFLAGS := $(IFLAGS) $(LFLAGS) -lft -lmlx -lX11 -lXext -lm
 
-all:	
+all:	$(LIBMLX)	
 	@make -C $(LIBFTDIR)
 	@make -C $(LIBMLXDIR)
 	@make $(NAME)	
@@ -48,6 +49,9 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p $(OBJDIR) / $(*D)
 	$(CC) $(CFLAGS) $(IFLAGS) -c $< -MMD -MP -MF $(OBJDIR)/$*.d  -o $@
 	$(CC) $(CFLAGS) $(IFLAGS) -c -o $@ $<
+
+$(LIBMLX) :
+	tar zxvf $(LIBMLXTAR)
 
 clean	:
 			$(RM) $(OBJECTS)
