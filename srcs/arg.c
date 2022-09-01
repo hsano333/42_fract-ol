@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 00:58:38 by hsano             #+#    #+#             */
-/*   Updated: 2022/09/01 13:05:57 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/01 18:18:53 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,21 @@ void	invalid_parameter(int argc, t_fract *fract)
 int	set_option(int argc, char **argv, t_fract *fract)
 {
 	int	error;
+	size_t	i;
 
 	if (argc == 2)
 		return (true);
 	else if (argc == 3)
 		return (false);
+
+	i = -1;
+	while (argv[2][++i])
+		if (!(ft_isdigit(argv[2][i]) || (argv[2][i] == '.')))
+			return (false);
+	i = -1;
+	while (argv[3][++i])
+		if (!(ft_isdigit(argv[3][i]) || (argv[3][i] == '.')))
+			return (false);
 	fract->c.r = (long double)ft_atod(argv[2], &error);
 	if (error == true || fract->c.r > 2 || fract->c.r < -2)
 		return (false);
