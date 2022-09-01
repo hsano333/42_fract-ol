@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 00:58:38 by hsano             #+#    #+#             */
-/*   Updated: 2022/09/01 18:18:53 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/01 18:22:03 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	invalid_parameter(int argc, t_fract *fract)
 		ft_printf("\n%s:%s\n", strerror(errno), "First parameter is invalid\n\n");
 	ft_printf("usage: fract fract_set [init_r] [init_i]\n");
 	ft_printf("fract_set:\n");
-	ft_printf(" 	\"m\" , \"1\" , \"mandelbrot\"		: display Mandelbrot set\n");
+	ft_printf(" 	\"m\" , \"1\" , \"mandelbrot\"	: display Mandelbrot set\n");
 	ft_printf(" 	\"j\" , \"2\" , \"julia\"		: display julia set\n");
 	ft_printf(" 	\"b\" , \"3\" , \"burning_ship\"	: display burning-ship set\n");
 	ft_printf(" 	\"g\" , \"4\" , \"gasket\"		: display gasket set\n");
@@ -79,7 +79,8 @@ int	set_option(int argc, char **argv, t_fract *fract)
 		return (true);
 	else if (argc == 3)
 		return (false);
-
+	else if (argc >= 5)
+		return (false);
 	i = -1;
 	while (argv[2][++i])
 		if (!(ft_isdigit(argv[2][i]) || (argv[2][i] == '.')))
