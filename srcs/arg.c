@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 00:58:38 by hsano             #+#    #+#             */
-/*   Updated: 2022/09/01 18:22:03 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/02 01:24:18 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	invalid_parameter(int argc, t_fract *fract)
 
 int	set_option(int argc, char **argv, t_fract *fract)
 {
-	int	error;
+	int		error;
 	size_t	i;
 
 	if (argc == 2)
