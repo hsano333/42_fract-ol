@@ -51,7 +51,7 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) $(IFLAGS) -c -o $@ $<
 
 $(LIBMLX) :
-	tar zxvf $(LIBMLXTAR)
+	tar zxvf $(LIBMLXTAR) -C $(LIB)
 
 clean	:
 			$(RM) $(OBJECTS)
