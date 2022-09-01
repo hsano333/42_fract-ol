@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 00:58:38 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/31 19:25:00 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/01 06:46:25 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ int	set_fract(char **argv, t_fract *fract)
 void	invalid_parameter(int argc, t_fract *fract)
 {
 	if (argc <= 2)
-		ft_printf("parameters are missing\n");
-	if (fract->fract_set == INVALID)
+		ft_printf("\nparameters are missing\n");
+	else if (fract->fract_set == INVALID)
 		ft_printf("First parameter is invalid\n");
 	ft_printf("usage: fract fract_set [init_r] [init_i]\n");
 	ft_printf("fract_set:\n");
@@ -64,7 +64,7 @@ void	invalid_parameter(int argc, t_fract *fract)
 	ft_printf("\nsample11: fract m \n");
 	ft_printf("sample12: fract julia -0.12 0.74 \n");
 	ft_printf("sample13: fract b \n");
-	ft_printf("sample13: fract g \n");
+	ft_printf("sample14: fract g \n");
 	exit(1);
 }
 
@@ -72,13 +72,13 @@ int	set_option(int argc, char **argv, t_fract *fract)
 {
 	int	error;
 
-	if (argc <= 2)
+	if (argc == 2)
 		return (true);
+	else if (argc == 3)
+		return (false);
 	fract->c.r = (long double)ft_atod(argv[2], &error);
 	if (error == true || fract->c.r > 2 || fract->c.r < -2)
 		return (false);
-	if (argc == 3)
-		return (true);
 	fract->c.i = (long double)ft_atod(argv[3], &error);
 	if (error == true || fract->c.i > 2 || fract->c.i < -2)
 		return (false);

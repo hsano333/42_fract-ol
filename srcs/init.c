@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 02:55:18 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/31 19:24:26 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/01 06:53:16 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include "color.h"
 #include "arg.h"
 
-int	expose_win(void *p)
+static int	expose_win(void *p)
 {
 	t_fract	*fract;
 
@@ -28,6 +28,13 @@ int	expose_win(void *p)
 		   	fract->image_info.image, fract->offset.x, fract->offset.y);
 	return (true);
 }
+
+static	int	unlock(t_fract *fract)
+{
+	fract->lock = false;
+	return (true);
+}
+
 
 static int	init_mlx(t_fract *fract)
 {

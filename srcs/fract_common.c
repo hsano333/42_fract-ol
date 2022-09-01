@@ -6,19 +6,13 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 05:38:17 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/31 19:22:02 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/01 07:04:49 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fract.h"
 #include "image.h"
 #include <float.h>
-
-int	unlock(t_fract *fract)
-{
-	fract->lock = false;
-	return (true);
-}
 
 int	close_fract(t_fract *fract)
 {
@@ -27,16 +21,6 @@ int	close_fract(t_fract *fract)
 	mlx_destroy_window(fract->mlx, fract->window);
 	exit(0);
 	return (0);
-}
-
-void	set_step(t_fract *fract)
-{
-	if (fract->w_width != 0)
-		fract->step.r = (fract->i_area.r_last - fract->i_area.r_begin) \
-			/ fract->w_width;
-	if (fract->w_height != 0)
-		fract->step.i = (fract->i_area.i_last - fract->i_area.i_begin) \
-			/ fract->w_height;
 }
 
 void	check_overflow(t_fract *fract, t_iarea tmp_area)
@@ -76,3 +60,23 @@ void	update_display_area(t_fract *fract, t_point point, \
 	tmp_area.i_last = center.i + distance.i * (1 - ratio.i);
 	check_overflow(fract, tmp_area);
 }
+
+t_ipoint	transform_ri(t_fract *fract, int x, int y)
+{
+	t_ipoint	point;
+
+	point.r = fract->i_area.r_begin + fract->step.r * x;
+	point.i = fract->i_area.i_begin + fract->step.i * y;
+	return (point);
+}
+
+void	set_step(t_fract *fract)
+{
+	if (fract->w_width != 0)
+		fract->step.r = (fract->i_area.r_last - fract->i_area.r_begin) \
+			/ fract->w_width;
+	if (fract->w_height != 0)
+		fract->step.i = (fract->i_area.i_last - fract->i_area.i_begin) \
+			/ fract->w_height;
+}
+
