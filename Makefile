@@ -24,6 +24,11 @@ OBJDIR	:= ./obj
 OBJECTS	:= $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
 DEPS	:= $(OBJECTS:.o=.d)
 INCS	:= ./include $(LIBFTDIR)/include $(LIBMLXDIR)
+ifeq ($(shell uname),Darwin)
+INCS	:= ./include $(LIBFTDIR)/include $(LIBMLXDIR) /opt/X11/include
+else
+INCS	:= ./include $(LIBFTDIR)/include $(LIBMLXDIR)
+endif
 
 LIBDIRS	:= $(LIBFTDIR) $(LIBMLXDIR) 
 IFLAGS	:= $(addprefix -I,$(INCS))
@@ -34,7 +39,11 @@ LIBS	:= $(LIBFT) $(LIBMLX)
 
 CC	:= cc
 CFLAGS	:= -Wall -Wextra -Werror -fsanitize=address
-LDFLAGS := $(IFLAGS) $(LFLAGS) -lft -lmlx -lX11 -lXext -lm
+ifeq ($(shell uname),Darwin)
+LDFLAGS := $(IFLAGS) $(LFLAGS) -lft -lm -L/usr/X11R6/lib -lmlx -lXext -framework OpenGL -framework AppKit
+else
+LDFLAGS := $(IFLAGS) $(LFLAGS) -lft -lm -lmlx -lX11 -lXext
+endif
 
 all:	$(LIBMLX)	
 	@make -C $(LIBFTDIR)
