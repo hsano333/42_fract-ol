@@ -1,58 +1,31 @@
-CC		:= cc
-CFLAGS	:= -Wall -Wextra -Werror
-INCLUDE := -I./include
-NAME 	:= libft.a
-LIBFT = ./libft
-SRCDIR	:= ./srcs/
-SRC		:= parse.c parse_utils.c ft_atoi_base.c print.c ft_strnbr_base.c print_digit.c print_str.c print_utils.c common.c
-ENTRY	:= ft_printf.c
-ENTRYBONUS	:= ft_printf_bonus.c
-ifdef WITH_BONUS
-ENTRY	:= $(ENTRYBONUS)
-endif
-SRC	+= $(ENTRY)
+CC		= cc
+CFLAGS	= -Wall -Wextra -Werror -I ${HEAD}
+NAME 	= libft.a
+PRE		= ./
+HEAD	= ./include
+SRC		= ft_strnstr.c ft_isdigit.c ft_putstr_fd.c ft_strlcpy.c ft_strlen.c ft_memcmp.c ft_putnbr_fd.c ft_strchr.c ft_striteri.c ft_bzero.c ft_strjoin.c ft_isascii.c ft_memcpy.c ft_isprint.c ft_putendl_fd.c ft_substr.c ft_toupper.c ft_split.c ft_strrchr.c ft_isalpha.c ft_memchr.c ft_putchar_fd.c ft_memset.c ft_strncmp.c ft_strmapi.c ft_strtrim.c ft_memmove.c ft_strlcat.c ft_calloc.c ft_strdup.c ft_atoi.c ft_isalnum.c ft_itoa.c ft_tolower.c ft_ltoa.c ft_atol.c ft_atof.c ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
+PRINT	= ft_printf.c parse.c parse_utils.c ft_atoi_base.c print.c ft_strnbr_base.c print_digit.c print_str.c print_utils.c common.c
+GNL		= get_next_line.c get_next_line_utils.c 
 
-SRCS	:= $(addprefix $(SRCDIR), $(SRC))
-OBJS	:= $(SRCS:.c=.o)
-OBJDIR	:= ./obj
-LIBFTNAME := libft.a
-LIBFTOBJS := $(LIBFT)/$(LIBFTNAME)
-OBJECTS	:= $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
-DEPS	:= $(OBJECTS:.o=.d)
-BDEPS	:= $(OBJECTS:.o=.d)
+PRINTS	= ${addprefix ./printf/, ${PRINT}}
+GNLS	= ${addprefix ./gnl/, ${GNL}}
+SRCS	= ${addprefix ${PRE}, ${SRC}}
+SRCS	+= ${PRINTS} ${GNLS}
+OBJS	= $(SRCS:.c=.o)
+BSRCS	= ${addprefix ${PRE}, ${BSRC}}
+BOBJS	= $(BSRCS:.c=.o)
 
-all:	
-		@make bonus -C $(LIBFT)
-		@make $(NAME)
+all:	${NAME}
 
-$(NAME)	:	$(OBJECTS) $(LIBFTOBJS)
-			@cp $(LIBFTOBJS) $(NAME)
-			@ar rcs $(NAME) $(OBJECTS) 
-
-
-$(OBJDIR)/%.o: $(SRCDIR)/%.c
-	@mkdir -p $(OBJDIR) / $(*D)
-	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -MMD -MP -MF $(OBJDIR)/$*.d  -o $@
-	@$(CC) $(CFLAGS) $(INCLUDE) -c -o $@ $<
+${NAME}	:	${OBJS}
+			@ar rcs ${NAME} ${OBJS}
 
 clean	:
-			$(RM) $(OBJECTS)
-			$(RM) $(DEPS)
-			$(RM) $(OBJDIR)/$(ENTRYBONUS:.c=.o)
-			$(RM) $(OBJDIR)/$(ENTRYBONUS:.c=.d)
-			make clean -C $(LIBFT)
+			@${RM} ${OBJS}
+			@${RM} ${BOBJS}
 
 fclean	:	clean
-			$(RM) $(NAME)
-			$(RM) $(LIBFTOBJS)
+			@${RM} ${NAME}
 
 re		:	fclean all
 
-bonus	:	
-			@make WITH_BONUS=1
-
-ifeq ($(findstring clean,$(MAKECMDGOALS)),)
--include $(DEPS)
-endif
-
-.PHONY: clean fclean bonus re
