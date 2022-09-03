@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 03:01:01 by hsano             #+#    #+#             */
-/*   Updated: 2022/09/01 20:42:24 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/03 05:49:44 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ enum	e_error{
 	MLX_WINDOW_ERROR,
 };
 
-typedef double	t_fract_type;
+typedef long double	t_fract_type;
 typedef struct s_point {
 	int	x;
 	int	y;

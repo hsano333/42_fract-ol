@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 00:58:38 by hsano             #+#    #+#             */
-/*   Updated: 2022/09/02 01:24:18 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/02 17:21:43 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,37 @@ void	invalid_parameter(int argc, t_fract *fract)
 	exit(1);
 }
 
+static int	check_word(char *str)
+{
+	size_t	i;
+	size_t	dot_cnt;
+
+	i = 0;
+	dot_cnt = 0;
+
+
+	if (!((ft_isdigit(str[i]) || str[i] == '-')))
+		return (false);
+	while (str[++i])
+	{
+		if (ft_isdigit(str[i]))
+			continue ;
+		else if (str[i] == '.')
+		{
+			dot_cnt++;
+			continue ;
+		}
+		else
+			return (false);
+	}
+	if (dot_cnt >= 2)
+		return (false);
+	return (true);
+}
+
 int	set_option(int argc, char **argv, t_fract *fract)
 {
 	int		error;
-	size_t	i;
 
 	if (argc == 2)
 		return (true);
@@ -81,14 +108,10 @@ int	set_option(int argc, char **argv, t_fract *fract)
 		return (false);
 	else if (argc >= 5)
 		return (false);
-	i = -1;
-	while (argv[2][++i])
-		if (!(ft_isdigit(argv[2][i]) || (argv[2][i] == '.')))
-			return (false);
-	i = -1;
-	while (argv[3][++i])
-		if (!(ft_isdigit(argv[3][i]) || (argv[3][i] == '.')))
-			return (false);
+	if (!check_word(argv[2]))
+		return (false);
+	if (!check_word(argv[3]))
+		return (false);
 	fract->c.r = (long double)ft_atod(argv[2], &error);
 	if (error == true || fract->c.r > 2 || fract->c.r < -2)
 		return (false);

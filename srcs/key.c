@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 09:11:31 by hsano             #+#    #+#             */
-/*   Updated: 2022/09/01 13:36:38 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/03 05:19:06 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ void	set_calc_method(t_fract *fract)
 	else if (fract->calc_color == (int (*)())calc_color6)
 		fract->calc_color = (int (*)())calc_color7;
 	else if (fract->calc_color == (int (*)())calc_color7)
+		fract->calc_color = (int (*)())calc_color8;
+	else if (fract->calc_color == (int (*)())calc_color8)
 		fract->calc_color = (int (*)())calc_color1;
 	fract->create_image_flag = true;
 	((t_fract *)fract)->lock = true;

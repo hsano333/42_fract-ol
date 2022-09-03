@@ -6,18 +6,12 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 02:41:17 by hsano             #+#    #+#             */
-/*   Updated: 2022/09/01 07:05:41 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/02 17:08:53 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef IMAGE_H
 # define IMAGE_H
-# define R_START -1.1
-# define R_END 1.8
-# define I_START -1.2
-# define I_END 1.2
-# define ZOOM_SCALE 2
-# define ZOOM_RATIO 1.2
 
 # include "fract.h"
 

@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:50:26 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/31 23:47:17 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/03 05:59:43 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int	calc_color3(int n, int loop_max, int diverse_flag)
 
 	color = loop_max;
 	color = n;
+	if (n >= 255)
+		n = 255;
 	if (diverse_flag)
 		color = (n << 16) + (n << 8) + n;
 	else
@@ -67,6 +69,8 @@ int	calc_color4(int n, int loop_max, int diverse_flag)
 	color = loop_max;
 	color = n;
 	n = (255 * n) / loop_max;
+	if (n >= 255)
+		n = 255;
 	if (diverse_flag)
 		color = n * loop_max;
 	else
