@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 01:31:35 by hsano             #+#    #+#             */
-/*   Updated: 2022/09/06 07:19:20 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/06 14:37:10 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ void	loop_xy(t_fract *fract, int (*get_color)(t_fract *, t_point))
 		if (fract->reverse_y)
 			ptr = fract->image_info.addr + fract->image_info.sl * (point.y);
 		else
-			ptr = fract->image_info.addr + fract->image_info.sl * (fract->w_height - point.y - 1);
+			ptr = fract->image_info.addr \
+				+ fract->image_info.sl * (fract->w_height - point.y - 1);
 		point.x = fract->w_width;
 		while (point.x--)
 		{
