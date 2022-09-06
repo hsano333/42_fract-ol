@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 00:58:38 by hsano             #+#    #+#             */
-/*   Updated: 2022/09/02 17:21:43 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/06 11:49:52 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ static int	check_word(char *str)
 
 	i = 0;
 	dot_cnt = 0;
-
-
 	if (!((ft_isdigit(str[i]) || str[i] == '-')))
 		return (false);
 	while (str[++i])
