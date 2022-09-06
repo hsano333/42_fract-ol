@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 02:30:26 by hsano             #+#    #+#             */
-/*   Updated: 2022/09/06 07:47:44 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/06 09:20:52 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,10 @@ void	init_julia(t_fract *fract)
 {
 	fract->fract_set = JULIA;
 	fract->get_image = (int (*)())get_julia_image;
-	fract->i_area.r_begin = -2.0;
-	fract->i_area.r_last = 2.0;
-	fract->i_area.i_begin = -1.8;
-	fract->i_area.i_last = 1.2;
+	fract->i_area.r_begin = -1.85;
+	fract->i_area.r_last = 1.85;
+	fract->i_area.i_begin = -1.6;
+	fract->i_area.i_last = 1.6;
 	fract->iteration_max = INTERATION_INIT;
 	fract->calc_color = (int (*)())calc_color7;
 	fract->defalut_color = ((255 << 16) + (255 << 8) + 255);
