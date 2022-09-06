@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 01:31:35 by hsano             #+#    #+#             */
-/*   Updated: 2022/09/06 15:02:43 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/06 09:06:00 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	set_init_value(t_fract *fract)
 	fract->c.r = -0.12;
 	fract->c.i = 0.74;
 	fract->offset.x = (W_WIDTH - IMAGE_WIDTH) / 4;
-	fract->offset.y = -((W_HEIGHT - IMAGE_HEIGHT) / 4);
+	fract->offset.y = (W_HEIGHT - IMAGE_HEIGHT) / 4;
 	set_step(fract);
 	fract->local_endian = 0;
 	if (((unsigned char *)&a)[0] == 0x11)
