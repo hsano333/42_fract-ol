@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 19:46:38 by hsano             #+#    #+#             */
-/*   Updated: 2022/09/01 20:40:51 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/06 06:17:53 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,10 @@ void	zoom_action(t_fract *fract, int x, int y, int zoom_mode)
 	if (zoom_mode == ZOOM_IN)
 		ratio = 1 / ratio;
 	point.x = x;
-	point.y = y;
+	if (fract->reverse_y)
+		point.y = y;
+	else
+		point.y = fract->w_height - y - 1;
 	offset.x = 0;
 	offset.y = 0;
 	tmp_area = fract->i_area_base;

@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 20:46:56 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/31 20:13:24 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/06 06:15:50 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,5 @@ void	init_burning_ship(t_fract *fract)
 	fract->iteration_max = INTERATION_INIT;
 	fract->calc_color = (int (*)())calc_color6;
 	fract->defalut_color = ((255 << 16) + (255 << 8) + 255);
+	fract->reverse_y = true;
 }

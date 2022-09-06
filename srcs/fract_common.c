@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 05:38:17 by hsano             #+#    #+#             */
-/*   Updated: 2022/09/01 20:39:36 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/06 07:14:57 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	update_display_area(t_fract *fract, t_point point, \
 	zoom_center.r = fract->i_area.r_begin \
 		+ fract->step.r * (point.x + offset.x);
 	zoom_center.i = fract->i_area.i_begin \
-		+ fract->step.i * (point.y + offset.y);
+		+ fract->step.i * ((point.y) + offset.y);
 	ratio.r = (zoom_center.r - fract->i_area.r_begin) \
 		/ (fract->i_area.r_last - fract->i_area.r_begin);
 	ratio.i = (zoom_center.i - fract->i_area.i_begin) \

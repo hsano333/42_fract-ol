@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 03:01:01 by hsano             #+#    #+#             */
-/*   Updated: 2022/09/03 05:49:44 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/06 06:15:28 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ typedef struct s_fract {
 	int				create_image_flag;
 	int				local_endian;
 	int				defalut_color;
+	int				reverse_y;
 	void			(*init)(void *);
 	void			*window;
 	void			*mlx;

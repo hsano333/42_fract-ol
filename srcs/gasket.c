@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 17:31:41 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/31 19:19:53 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/06 06:19:44 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,4 +119,5 @@ void	init_gasket(t_fract *fract)
 	fract->i_area_base = fract->i_area;
 	fract->calc_color = (int (*)())calc_color1;
 	fract->defalut_color = ((255 << 16) + (255 << 8) + 255);
+	fract->reverse_y = false;
 }
