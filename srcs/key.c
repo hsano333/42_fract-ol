@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 09:11:31 by hsano             #+#    #+#             */
-/*   Updated: 2022/09/06 09:27:36 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/06 16:30:11 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	update_over_offset(t_fract *fract)
 	if (fract->reverse_y)
 		fract->offset.y -= ((W_HEIGHT - IMAGE_HEIGHT) / 4);
 	else
-		fract->offset.y = ((0 - fract->offset.y) + ((W_HEIGHT - IMAGE_HEIGHT) / 4));
+		fract->offset.y = ((W_HEIGHT - IMAGE_HEIGHT) / 4) - fract->offset.y;
 	update_display_area(fract, point, 1, fract->offset);
 	fract->offset.x = (W_WIDTH - IMAGE_WIDTH) / 4;
 	fract->offset.y = (W_HEIGHT - IMAGE_HEIGHT) / 4;
