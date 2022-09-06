@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 09:11:31 by hsano             #+#    #+#             */
-/*   Updated: 2022/09/06 09:06:55 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/06 09:11:29 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void	update_offset(int key, t_fract *fract)
 	else if (key == ARROW_DOWN)
 		fract->offset.y -= MOVING_VALUE;
 	if (fract->offset.x > 0 || fract->offset.x < (W_WIDTH - IMAGE_WIDTH) / 2 \
-			|| fract->offset.y < 0 \
-			|| fract->offset.y > (IMAGE_HEIGHT - W_HEIGHT) / 2)
+			|| fract->offset.y > 0 \
+			|| fract->offset.y < (W_HEIGHT - IMAGE_HEIGHT) / 2)
 	{
 		update_over_offset(fract);
 	}
