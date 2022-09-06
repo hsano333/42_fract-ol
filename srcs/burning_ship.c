@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 20:46:56 by hsano             #+#    #+#             */
-/*   Updated: 2022/09/06 06:15:50 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/06 09:24:53 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,9 @@ void	init_burning_ship(t_fract *fract)
 {
 	fract->fract_set = BURNING_SHIP;
 	fract->get_image = (int (*)())get_burning_ship_image;
-	fract->i_area.r_begin = -2.5;
-	fract->i_area.r_last = 1.7;
-	fract->i_area.i_begin = -1.6;
+	fract->i_area.r_begin = -2.4;
+	fract->i_area.r_last = 1.9;
+	fract->i_area.i_begin = -1.9;
 	fract->i_area.i_last = 1.6;
 	fract->iteration_max = INTERATION_INIT;
 	fract->calc_color = (int (*)())calc_color6;
