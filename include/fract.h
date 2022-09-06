@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 03:01:01 by hsano             #+#    #+#             */
-/*   Updated: 2022/09/06 06:15:28 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/06 07:58:14 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define ON_EXPOSE 14
 
 # include <stdbool.h>
+# include <limits.h>
 # include "mlx_int.h"
 # include "mlx.h"
 # include "ft_printf.h"

@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 02:22:23 by hsano             #+#    #+#             */
-/*   Updated: 2022/09/06 06:18:59 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/06 07:40:39 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ void	init_mandelbrot(t_fract *fract)
 	fract->get_image = (int (*)())get_mandelbrot_image;
 	fract->i_area.r_begin = -2.1;
 	fract->i_area.r_last = 0.8;
-	fract->i_area.i_begin = -1.2;
-	fract->i_area.i_last = 1.2;
+	fract->i_area.i_begin = -1.5;
+	fract->i_area.i_last = 1.0;
 	fract->iteration_max = INTERATION_INIT;
 	fract->calc_color = (int (*)())calc_color1;
 	fract->defalut_color = ((255 << 16) + (255 << 8) + 255);
