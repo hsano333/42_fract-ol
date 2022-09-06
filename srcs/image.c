@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 01:31:35 by hsano             #+#    #+#             */
-/*   Updated: 2022/09/06 07:58:04 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/06 15:02:43 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ int	create_image(t_fract *fract)
 	if (fract->diversion_count > 0)
 		tmp_ratio = (float)(100 * fract->near_diversion_count) \
 			/ fract->diversion_count;
-	if (tmp_ratio >= DIVERSION_COUNT_UP_THORESHOLD && (fract->iteration_max + 2 + (tmp_ratio * 10)) < INT_MAX)
+	if (tmp_ratio >= DIVERSION_COUNT_UP_THORESHOLD \
+			&& (fract->iteration_max + 2 + (tmp_ratio * 10)) < INT_MAX)
 		fract->iteration_max += 2 + (tmp_ratio * 10);
 	else if ((tmp_ratio < DIVERSION_COUNT_DOWN_THORESHOLD) \
 		&& (fract->iteration_max > INTERATION_INIT) && fract->zoom_count > 0)
