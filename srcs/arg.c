@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 00:58:38 by hsano             #+#    #+#             */
-/*   Updated: 2022/09/06 11:49:52 by hsano            ###   ########.fr       */
+/*   Updated: 2022/09/06 09:37:50 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ void	invalid_parameter(int argc, t_fract *fract)
 	ft_printf(" 	\"j\" , \"2\" , \"julia\"		: display julia set\n");
 	ft_printf(" 	\"b\" , \"3\" , \"burning_ship\"	: display burning-ship set\n");
 	ft_printf(" 	\"g\" , \"4\" , \"gasket\"		: display gasket set\n");
-	ft_printf("init_r=[-]NUM:init_r is real number. -2 <= init_r and ");
-	ft_printf("init_r <= 2. It's necessary for Julia set but not for others\n");
-	ft_printf("init_i=[-]NUM:init_i is real number. -2 <= init_i and ");
-	ft_printf("init_i <= 2. It's necessary for Julia set but not for others\n");
+	ft_printf("init_r=[-]NUM:init_r is real number. -7 <= init_r and ");
+	ft_printf("init_r <= 7. It's necessary for Julia set but not for others\n");
+	ft_printf("init_i=[-]NUM:init_i is image number. -7 <= init_i and ");
+	ft_printf("init_i <= 7. It's necessary for Julia set but not for others\n");
 	ft_printf("\nsample11: fract m \n");
 	ft_printf("sample12: fract julia -0.12 0.74 \n");
 	ft_printf("sample13: fract b \n");
@@ -111,10 +111,10 @@ int	set_option(int argc, char **argv, t_fract *fract)
 	if (!check_word(argv[3]))
 		return (false);
 	fract->c.r = (long double)ft_atod(argv[2], &error);
-	if (error == true || fract->c.r > 2 || fract->c.r < -2)
+	if (error == true || fract->c.r > 7 || fract->c.r < -7)
 		return (false);
 	fract->c.i = (long double)ft_atod(argv[3], &error);
-	if (error == true || fract->c.i > 2 || fract->c.i < -2)
+	if (error == true || fract->c.i > 7 || fract->c.i < -7)
 		return (false);
 	return (true);
 }
